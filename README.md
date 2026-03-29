@@ -83,7 +83,17 @@ ctk-themio-demo
 
 Make changes and see the effects instantly across all 18+ CustomTkinter widget types. The live preview panel updates as you adjust colors, borders, corner radii, and spacing.
 
-Supported widgets: CTk, CTkToplevel, CTkFrame, CTkScrollableFrame, CTkButton, CTkLabel, CTkEntry, CTkComboBox, CTkOptionMenu, CTkSlider, CTkProgressBar, CTkCheckBox, CTkRadioButton, CTkSwitch, CTkSegmentedButton, CTkTabview, CTkScrollbar, CTkTextbox, DropdownMenu.
+Supported widgets: 
+
+- CTk
+- CTkToplevel
+- CTkFrame
+- CTkScrollableFrame
+- CTkButton
+- CTkLabel
+- CTkEntry
+- CTkComboBox
+- CTkOptionMenu
 
 ### Light and Dark Modes
 
