@@ -1,10 +1,9 @@
-# CTk Theme Builder (`ctk_themio`)
+
+# CTk Themio (`ctk_themio`)
 
 Visual theme editor for [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) applications. Design, preview, and manage custom themes with a WYSIWYG interface.
 
-<figure>
-  <img src="docs/CTkThemeBuilder-about.png" alt="CTk Theme Builder" style="width:100%">
-</figure>
+Based on [CTk Theme Builder](https://github.com/avalon60/ctk_theme_builder) by Clive Bostock, updated by Adam Twardoch.
 
 ## Installation
 
