@@ -184,3 +184,4 @@ Thanks to Tom Schimansky for [CustomTkinter](https://github.com/TomSchimansky/Cu
 ## License
 
 [MIT](LICENSE)
+
