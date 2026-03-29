@@ -1,62 +1,79 @@
-venv/
+# Private & IDE
+_private/
 .idea
-**/__pycache__/
-*.pyc
+.vscode/
+*.swp
+*.swo
 
-assets/data/ctk_theme_builder.db
-
-tmp/
-
-*.backup
-
-assets/etc/listener.started
-
-assets/palettes/Wibble.json
-
-user_themes/Wibble.json
-
-user_themes/Scratch.json
-
-assets/palettes/Scratch.json
-
-complex_example.py
-
-assets/palettes/
-
-simple_example.py
-
-assets/data/ctk_theme_builder-2.2.0.db
-
-ctk_theme_builder
-
-assets/etc/qa_application.stop
-
-user_themes/Demo.json
-
-user_themes/Demo3.json
-
-user_themes/Demo2.json
-
-gridedit.py
-
-docs/Windows.png
-
-docs/Screenshot from 2023-07-18 09-23-18.png
-
-assets/images/CTkThemeBuilder.png
-
-assets/etc/qa_application.started
-
-user_themes/Test.json
-
-lib/CTkToolTip-main.zip
-
-log/ctk_tb.log
-
-*.db
-
-theme_builder_setup.tar
-
-*.log
-
+# Python version management
 .python-version
+.pyenv
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Build & distribution
+dist/
+build/
+*.egg-info/
+.eggs/
+*.whl
+*.tar.gz
+
+# Generated version (hatch-vcs)
+src/ctk_themio/_version.py
+
+# Python compilation & caching
+*.pyc
+*.pyo
+*.pyd
+**/__pycache__/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+*.so
+
+# Environment & config
+.env
+.env.local
+.env.*.local
+
+# IDE & editor artifacts
+*.backup
+.DS_Store
+
+# Logs
+*.log
+log/
+
+# Temporary files
+tmp/
+*.tmp
+*.temp
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Database files inside package assets (generated at runtime)
+**/assets/data/*.db
+**/assets/etc/listener.started
+**/assets/etc/qa_application.started
+**/assets/etc/qa_application.stop
+**/palettes/Scratch.json
+**/palettes/Wibble.json
+
+# Legacy/old project files
+complex_example.py
+ctk_theme_builder
+docs/Screenshot*
+docs/Windows.png
+gridedit.py
+lib/
+simple_example.py
+theme_builder_setup.tar
