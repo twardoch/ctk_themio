@@ -1,23 +1,49 @@
 
 # CTk Themio (`ctk_themio`)
 
-Visual theme editor for [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) applications. Design, preview, and manage custom themes with a WYSIWYG interface.
+Visual theme editor for the CustomTkinter package. Design, preview, and manage custom themes with a WYSIWYG interface.
 
-Based on [CTk Theme Builder](https://github.com/avalon60/ctk_theme_builder) by Clive Bostock, updated by Adam Twardoch.
+- Uvx install: [https://uvx.sh/ctk_themio/](https://uvx.sh/ctk_themio/)
+- PyPI: [https://pypi.org/p/ctk_themio](http://pypi.org/p/ctk_themio)
+- GitHub source: [https://github.com/twardoch/ctk_themio](https://github.com/twardoch/ctk_themio)
+- Uses [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter)
+- Based on [CTk Theme Builder](https://github.com/avalon60/ctk_theme_builder) by Clive Bostock
 
 ## Installation
 
-Requires **Python 3.13+**.
+### macOS / Linux
+
+```sh
+curl -LsSf uvx.sh/ctk_themio/install.sh | sh && ctk-themio
+```
+
+### Windows 
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://uvx.sh/fontmake/install.ps1 | iex"
+ctk-themio
+```
+
+### Universal
+
+If you have Python 3.13 or newer and `uv` installed: 
+
+#### Run the CTK Themio app
 
 ```bash
-# From PyPI
-pip install ctk_themio
+uvx --from ctk_themio ctk-themio
+```
 
-# Or with uv
-uv pip install ctk_themio
+#### Run the CTK Themio Demo app
 
-# Or via uvx (no install needed)
-uvx ctk_themio
+```bash
+uvx --from ctk_themio ctk-themio-demo
+```
+
+### Install into Python
+
+```
+uv pip install --system ctk_themio
 ```
 
 ### From source
