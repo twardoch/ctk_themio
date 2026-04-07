@@ -34,6 +34,11 @@ CTK_SITE_PACKAGES = os.path.dirname(CTK_SITE_PACKAGES)
 CTK_ASSETS = CTK_SITE_PACKAGES / Path('assets')
 CTK_THEMES = CTK_ASSETS / 'themes'
 
+# CustomTkinter installs themes into its own site-packages directory.
+# We need to know where it is so we can merge/export themes into CTk.
+
+# Files used for Inter-Process Communication (IPC) between the main builder
+# app and the live preview/QA app.
 QA_STOP_FILE = ETC_DIR / 'qa_application.stop'
 QA_STARTED_FILE = ETC_DIR / 'qa_application.started'
 LISTENER_FILE = ETC_DIR / 'listener.started'

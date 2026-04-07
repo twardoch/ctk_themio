@@ -1,6 +1,10 @@
-__title__ = 'CB CustomTkinter Theme Builder Preferences Module'
-__author__ = 'Clive Bostock'
-__license__ = 'MIT - see LICENSE.md'
+"""
+Preferences Database Manager.n
+n
+Handles all CRUD operations for the SQLite database that stores user n
+preferences, color palettes, and application state. Automatically initializes n
+the database on the first run if it does not exist.n
+"""
 
 from pathlib import Path
 import customtkinter as ctk
