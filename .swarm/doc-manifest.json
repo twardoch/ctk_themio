@@ -1,0 +1,706 @@
+{
+  "schema_version": 1,
+  "scanned_at": "2026-04-07T22:33:01.474Z",
+  "files": [
+    {
+      "path": "_private/ctk_repos/async-tkinter-loop/examples/README.md",
+      "title": "Examples",
+      "summary": "[Warning: 100+ docs found, listing first 100] - [while_true.py](while_true.py) - the most basic example how to do repeatable actions using non-blocking infinite `while True` loop in an asynchronous function; - [start_stop_counter.py](start_sto...",
+      "lines": 10,
+      "mtime": 1774800111506
+    },
+    {
+      "path": "_private/ctk_repos/async-tkinter-loop/README.md",
+      "title": "Asynchronous Tkinter Mainloop",
+      "summary": "[![Python tests](https://github.com/insolor/async-tkinter-loop/actions/workflows/python-tests.yml/badge.svg)](https://github.com/insolor/async-tkinter-loop/actions/workflows/python-tests.yml) [![Do...",
+      "lines": 149,
+      "mtime": 1774800111506
+    },
+    {
+      "path": "_private/ctk_repos/CTK_Color/README.md",
+      "title": "CTK_Color",
+      "summary": "[![PyPI](https://img.shields.io/pypi/v/CTK-Color.svg)](https://pypi.org/project/CTK-Color/)  [![Python Versions](https://img.shields.io/pypi/pyversions/YOUR_PACKAGE_NAME.svg)](https://pypi.org/proj...",
+      "lines": 63,
+      "mtime": 1774800124956
+    },
+    {
+      "path": "_private/ctk_repos/ctk_components/README.md",
+      "title": "README.md",
+      "summary": "<h1 align=\"center\">CTk Components</h1> <p align=\"center\">Version 20240226</p> CTk Components is a collection of widgets and utilities designed as extensions or add-ons for customtkinter 1. `CTkAler...",
+      "lines": 33,
+      "mtime": 1774800122518
+    },
+    {
+      "path": "_private/ctk_repos/ctk_interactive_canvas/CHANGELOG.md",
+      "title": "Changelog",
+      "summary": "All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versionin...",
+      "lines": 515,
+      "mtime": 1774800086499
+    },
+    {
+      "path": "_private/ctk_repos/ctk_interactive_canvas/CONTRIBUTING.md",
+      "title": "Contributing to CTk Interactive Canvas",
+      "summary": "Thank you for your interest in contributing to CTk Interactive Canvas! This document provides guidelines and instructions for contributing. - Be respectful and inclusive - Focus on constructive fee...",
+      "lines": 208,
+      "mtime": 1774800086499
+    },
+    {
+      "path": "_private/ctk_repos/ctk_interactive_canvas/README.md",
+      "title": "CTk Interactive Canvas",
+      "summary": "<a href=\"https://www.codefactor.io/repository/github/deltaga/ctk_interactive_canvas\"><img src=\"https://www.codefactor.io/repository/github/deltaga/ctk_interactive_canvas/badge\" alt=\"CodeFactor\" /></a>",
+      "lines": 285,
+      "mtime": 1774800086499
+    },
+    {
+      "path": "_private/ctk_repos/ctk_listbox/README.md",
+      "title": "CTkListbox",
+      "summary": "This is a **listbox widget** for customtkinter, works just like the tkinter listbox. ![Screenshot](https://github.com/Akascape/CTkListbox/assets/89206401/256c135f-3d6c-4daa-87a5-b4572a2c905f) > NOT...",
+      "lines": 79,
+      "mtime": 1774800117963
+    },
+    {
+      "path": "_private/ctk_repos/ctk_toggle/CONTRIBUTING.md",
+      "title": "Contributing to ctk_toggle",
+      "summary": "We welcome contributions to `ctk_toggle`. Here's how you can help: 1. Fork the repository and clone your fork. 2. Create a new branch for your feature or bugfix. 3. Write clear and concise code, fo...",
+      "lines": 10,
+      "mtime": 1774800088670
+    },
+    {
+      "path": "_private/ctk_repos/ctk_toggle/README.md",
+      "title": "README.md",
+      "summary": "<img src=\"https://github.com/DeltaGa/ctk_toggle/blob/main/assets/thumbnail.jpg\" alt=\"thumbnail\"> `ctk_toggle` is a lightweight and easy-to-use Python package designed to simplify the creation and m...",
+      "lines": 237,
+      "mtime": 1774800088670
+    },
+    {
+      "path": "_private/ctk_repos/ctk-colorpicker-plus/README.md",
+      "title": "ctk-colorpicker-plus",
+      "summary": "An extended and modernized color picker for [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter), featuring both a modal dialog and embeddable widget with a color wheel, brightness slide...",
+      "lines": 113,
+      "mtime": 1774800102001
+    },
+    {
+      "path": "_private/ctk_repos/ctk-opencv/README.md",
+      "title": "Modern GUI for Computer Vision with CustomTkinter",
+      "summary": "![Python](https://img.shields.io/badge/python-3.10-blue.svg) ![GitHub License](https://img.shields.io/github/license/trflorian/ctk-opencv?style=flat) ![demo](https://github.com/user-attachments/ass...",
+      "lines": 52,
+      "mtime": 1774800124141
+    },
+    {
+      "path": "_private/ctk_repos/ctk-sidebar/README.md",
+      "title": "Sidebar Control for CustomTkinter",
+      "summary": "<p align=\"center\"> <img alt=\"GitHub last commit\" src=\"https://img.shields.io/github/v/release/anthony-bernaert/ctk-sidebar\" /> <img alt=\"GitHub License\" src=\"https://img.shields.io/github/license/a...",
+      "lines": 79,
+      "mtime": 1774800101228
+    },
+    {
+      "path": "_private/ctk_repos/CTkCalender/README.md",
+      "title": "CTkCalendar",
+      "summary": "CTkCalendar is a modern and customizable calendar widget built with Python's `tkinter` and `customtkinter` libraries. It provides a sleek, user-friendly interface to interact with calendar data, an...",
+      "lines": 29,
+      "mtime": 1774800094542
+    },
+    {
+      "path": "_private/ctk_repos/CTkClock/README.md",
+      "title": "CTkClock",
+      "summary": "**A Library for CLock widget in Tkinter and CTkinter.** `c:\\users\\me\\appdata\\local\\programs\\python\\python38\\lib\\site-packages` **Example 1:** ```python from tkinter import * from CTkClock import * ...",
+      "lines": 111,
+      "mtime": 1774800083083
+    },
+    {
+      "path": "_private/ctk_repos/CTkCodeBoxPlus/README.md",
+      "title": "CTkCodeBoxPlus",
+      "summary": "A code editor widget for customtkinter (Enhanced Edition). ![image](https://github.com/user-attachments/assets/a22c6142-afc8-4239-840f-76e06ef7c668) - Multiple language support - Code syntax highli...",
+      "lines": 154,
+      "mtime": 1774800092163
+    },
+    {
+      "path": "_private/ctk_repos/CTkCollapsiblePanel/README.md",
+      "title": "CTkCollapsiblePanel",
+      "summary": "**CTkCollapsiblePanel** is a custom collapsible panel widget built on top of [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter). It provides a collapsible area to neatly show or hide c...",
+      "lines": 96,
+      "mtime": 1774800115122
+    },
+    {
+      "path": "_private/ctk_repos/CTkColorPicker/README.md",
+      "title": "CTkColorPicker",
+      "summary": "**A modern color picker made for customtkinter!** ![Screenshot](https://user-images.githubusercontent.com/89206401/209182773-d76bf05c-610e-4297-aec5-7bb61a11d6d3.jpg) ``` pip install CTkColorPicker...",
+      "lines": 80,
+      "mtime": 1774800074329
+    },
+    {
+      "path": "_private/ctk_repos/CTkCounterBox/README.md",
+      "title": "CTkCounterBox",
+      "summary": "A simple **unofficial** `customtkinter` widget to display and adjust a numeric counter using `+` and `–` buttons. Supports **floating-point steps**, **decimal formatting**, **value limiting**, and ...",
+      "lines": 73,
+      "mtime": 1774800125570
+    },
+    {
+      "path": "_private/ctk_repos/CTkDataGridView/README.md",
+      "title": "CTkDataGridView",
+      "summary": "CTkDataGridView is a library based in [C# DataGridView from Windows Forms](https://learn.microsoft.com/pt-br/dotnet/api/system.windows.forms.datagridview?view=windowsdesktop-7.0) created in tkinter...",
+      "lines": 53,
+      "mtime": 1774800098546
+    },
+    {
+      "path": "_private/ctk_repos/CTkDataVisualizingWidgets/README.md",
+      "title": "CTkDataVisualizingWidgets",
+      "summary": "**Custom data visualizing widgets like calendar, graph and chart.** A calendar widget consists of two parts title_bar and calendar frame. You can customize virtually everything in the widget. There is",
+      "lines": 133,
+      "mtime": 1774800099823
+    },
+    {
+      "path": "_private/ctk_repos/CTkDatePicker/README.md",
+      "title": "CTkDatePicker",
+      "summary": "CTkDatePicker is a custom date picker widget built using the CustomTkinter library. It provides a user-friendly interface for selecting dates, with both a text entry and a calendar popup for easy d...",
+      "lines": 150,
+      "mtime": 1774800115756
+    },
+    {
+      "path": "_private/ctk_repos/CTKEasyEditor/README.md",
+      "title": "CTKEasyEditor",
+      "summary": "An easy GUI editor for CustomTkinter in Python - think of it as a boilerplate generation tool for your CustomTkinter projects. Simply arrange elements, change their properties, and then export to a...",
+      "lines": 64,
+      "mtime": 1774800104632
+    },
+    {
+      "path": "_private/ctk_repos/CTkEntryMsg/CHANGELOG.md",
+      "title": "CHANGELOG.md",
+      "summary": "Change Log ========== [0.0.5] - 2024-01-03 ------------------ - Added msg_pos parameter - placement of messages on top or bottom of the entry widget [0.0.4] - 2023-12-25 ------------------ - Remove...",
+      "lines": 24,
+      "mtime": 1774800123369
+    },
+    {
+      "path": "_private/ctk_repos/CTkEntryMsg/README.md",
+      "title": "CTkEntryMsg",
+      "summary": "![Version](https://img.shields.io/static/v1?label=version&message=v.0.0.5&color=blue) ![License](https://img.shields.io/static/v1?label=license&message=MIT&color=green) ![Open Source](https://img.s...",
+      "lines": 172,
+      "mtime": 1774800123369
+    },
+    {
+      "path": "_private/ctk_repos/CTkFloatingNotifications/README.md",
+      "title": "CTkFloatingNotifications",
+      "summary": "CTkFloatingNotifications is a custom notification manager widget built using the CustomTkinter library. It provides an easy way to display various types of notifications within a CustomTkinter appl...",
+      "lines": 110,
+      "mtime": 1774800116463
+    },
+    {
+      "path": "_private/ctk_repos/CTkGridLayout/README.md",
+      "title": "CTkGridLayout",
+      "summary": "**Simple grid view module for [customtkinter](https://github.com/TomSchimansky/CustomTkinter) library** | BASE                                        | SCROLLABLE                                  |...",
+      "lines": 54,
+      "mtime": 1774800118759
+    },
+    {
+      "path": "_private/ctk_repos/CTkListbox/README.md",
+      "title": "CTkListbox",
+      "summary": "This is a **listbox widget** for customtkinter, works just like the tkinter listbox. ![Screenshot](https://github.com/Akascape/CTkListbox/assets/89206401/256c135f-3d6c-4daa-87a5-b4572a2c905f) ``` p...",
+      "lines": 82,
+      "mtime": 1774800074928
+    },
+    {
+      "path": "_private/ctk_repos/CTkMarkdown/README.md",
+      "title": "ctk-markdown",
+      "summary": "![python](https://img.shields.io/badge/python-3.9%2B-blue) ![customtkinter](https://img.shields.io/badge/customtkinter-required-1f6feb) ![status](https://img.shields.io/badge/status-alpha-orange) !...",
+      "lines": 65,
+      "mtime": 1774800114518
+    },
+    {
+      "path": "_private/ctk_repos/CTkMenuBar/README.md",
+      "title": "CTkMenuBar",
+      "summary": "Modern menu bar widget library for customtkinter. - Custom dropdown menus - Add menu in top of title bar - Classic and modern menubar with full customisability - Add commands and submenus ``` pip i...",
+      "lines": 118,
+      "mtime": 1774800075516
+    },
+    {
+      "path": "_private/ctk_repos/CTkMenuBarPlus/README.md",
+      "title": "CTkMenuBarPlus",
+      "summary": "Modern menu bar widget library for customtkinter with enhanced features. - [Installation](#installation-anchor) - [CTkMenuBar — Arguments](#ctkmenubar-arguments) - [CTkTitleMenu — Arguments](#ctkti...",
+      "lines": 399,
+      "mtime": 1774800093003
+    },
+    {
+      "path": "_private/ctk_repos/ctkmessagebox/README.md",
+      "title": "CustomTkinter Messagebox 3",
+      "summary": "CustomTkinter Messagebox 3 is an revised project based on [hoffmanlucas's ctkmessagebox2](https://github.com/hoffmanlucas/ctkmessagebox). this project add additional features as 1. position the Mes...",
+      "lines": 242,
+      "mtime": 1774800375941
+    },
+    {
+      "path": "_private/ctk_repos/CTkNavbar/README.md",
+      "title": "CTkNavbar",
+      "summary": "**Simple navigation bar view for [customtkinter](https://github.com/TomSchimansky/CustomTkinter) library** | ![Screenshot](./examples/screenshots/2.png)                                       | ![Sc...",
+      "lines": 66,
+      "mtime": 1774800119507
+    },
+    {
+      "path": "_private/ctk_repos/CTkPDFViewer/README.md",
+      "title": "CTkPDFViewer",
+      "summary": "A simple yet powerfull pdf viewer widget for customtkinter! This can be helpful for adding **documentation (in the form of PDF)** inside your application. Users can quicky view the offline copy of ...",
+      "lines": 60,
+      "mtime": 1774800076099
+    },
+    {
+      "path": "_private/ctk_repos/CTkPieChart/README.md",
+      "title": "CTkPieChart",
+      "summary": "Another piece in the puzzle, pie chart widget for customtkinter, simple and easy to visualize any data in pie chart form. ![Screenshot](https://github.com/Akascape/CTkPieChart/assets/89206401/2632a...",
+      "lines": 90,
+      "mtime": 1774800076787
+    },
+    {
+      "path": "_private/ctk_repos/CTkPopupKeyboard/README.md",
+      "title": "CTkPopupKeyboard",
+      "summary": "**On-Screen Keyboard/Numpad widget for customtkinter entries and textbox.** - Customize keyboard and numpad styles - All keyboard characters available - transparency effect - double click popup window",
+      "lines": 69,
+      "mtime": 1774800077381
+    },
+    {
+      "path": "_private/ctk_repos/CTkRadarChart/README.md",
+      "title": "CTkRadarChart",
+      "summary": "A simple widget for customtkinter to display radar chart, made with tkinter canvas. Fully custimasable widget, with resizability and theme colors. ![screenshot](https://github.com/Akascape/CTkRadar...",
+      "lines": 62,
+      "mtime": 1774800078017
+    },
+    {
+      "path": "_private/ctk_repos/CTkRangeSlider/README.md",
+      "title": "CTkRangeSlider",
+      "summary": "**A range slider widget made for [customtkinter](https://github.com/TomSchimansky/CustomTkinter)** ![Screenshot](https://user-images.githubusercontent.com/89206401/229349732-0e078b00-f2b7-46e7-9774...",
+      "lines": 75,
+      "mtime": 1774800078636
+    },
+    {
+      "path": "_private/ctk_repos/CtkRatingStar/README.md",
+      "title": "CtkRatingStar",
+      "summary": "A customizable star rating widget for CustomTkinter applications. This widget provides an intuitive and visually appealing way to implement rating functionality in your CustomTkinter projects. ![{3...",
+      "lines": 90,
+      "mtime": 1774800099175
+    },
+    {
+      "path": "_private/ctk_repos/CTkScrollableDropdown/README.md",
+      "title": "CTkScrollableDropdown",
+      "summary": "Replace the old looking tkMenu and add this new scrollable dropdown menu to customtkinter **optionmenu, combobox, entries, buttons** etc... - Rounded corners - **Define custom height for the menu**...",
+      "lines": 123,
+      "mtime": 1774800079233
+    },
+    {
+      "path": "_private/ctk_repos/CTkScrollableDropdownPP/README.md",
+      "title": "CTkScrollableDropdownPP",
+      "summary": "[![PyPI Downloads](https://static.pepy.tech/badge/ctkscrollabledropdownpp)](https://pepy.tech/projects/ctkscrollabledropdownpp) **CTkScrollableDropdownPP** is an enhanced dropdown widget for Custom...",
+      "lines": 105,
+      "mtime": 1774800095161
+    },
+    {
+      "path": "_private/ctk_repos/CTkSeparator/README.md",
+      "title": "CTkSeparator",
+      "summary": "A tool for customtkinter with with you can make separators Made to maximise **the ease of using it** **Comes for two types:** 1. **Window** - Root windows defined by the CTk function 2. **Frames** ...",
+      "lines": 18,
+      "mtime": 1774800090730
+    },
+    {
+      "path": "_private/ctk_repos/CTkSlideView/README.md",
+      "title": "CTkSlideView",
+      "summary": "A Slide View (Slideshow carousel) for customtkinter. This includes a smooth animation between the slides too 🤩 *** https://github.com/rigvedmaanas/CTkSlideView/assets/77579661/c10fb8f7-2057-4da2-b...",
+      "lines": 56,
+      "mtime": 1774800120822
+    },
+    {
+      "path": "_private/ctk_repos/ctkSpinbox/README.md",
+      "title": "ctkSpinbox",
+      "summary": "Spinbox class for customtkinter. Easy to integrate into any project as a class. Supports minimum and maximum values, change values by scrolling the mouse wheel. Based on FloatSpinbox https://github...",
+      "lines": 5,
+      "mtime": 1774800085671
+    },
+    {
+      "path": "_private/ctk_repos/CTkSuggestions/README.md",
+      "title": "CTkSuggestions",
+      "summary": "CTkSuggestions implements a suggestion dropdown for a customtkinter widget ```bash pip install CTkSuggestions ``` ```python import customtkinter as ctk from CTkSuggestions import suggestions exampl...",
+      "lines": 91,
+      "mtime": 1774800089336
+    },
+    {
+      "path": "_private/ctk_repos/CTkSyntaxHighlightedTextbox/README.md",
+      "title": "CTkSyntaxHighlightedTextbox",
+      "summary": "CTkSyntaxHighlightedTextbox is a customtkinter textbox with built in syntax highlighting.<br> The syntax highlighting is fully customizable a works using regexes. i made this because i needed it fo...",
+      "lines": 84,
+      "mtime": 1774800097010
+    },
+    {
+      "path": "_private/ctk_repos/CTkTable/README.md",
+      "title": "CTkTable",
+      "summary": "**Here is a quick and simple table widget having all the basic features.** ![Screenshot](https://user-images.githubusercontent.com/89206401/233420929-bf210cb3-5b5f-49b2-ba7a-f01d187e72cf.jpg) - Add...",
+      "lines": 99,
+      "mtime": 1774800079833
+    },
+    {
+      "path": "_private/ctk_repos/CTkTableRowSelector/README.md",
+      "title": "CTkTableRowSelector",
+      "summary": "Wrapper class around CTkTable to let users select rows. ![PyPI](https://img.shields.io/pypi/v/ctktablerowselector) ![PyPI - License](https://img.shields.io/pypi/l/ctktablerowselector) [![Code style...",
+      "lines": 53,
+      "mtime": 1774800083806
+    },
+    {
+      "path": "_private/ctk_repos/CTkToolTip/README.md",
+      "title": "CTkToolTip",
+      "summary": "**Small tooltip pop-up label for displaying details on customtkinter widgets.** ![example](https://user-images.githubusercontent.com/89206401/229771216-199727ef-2a01-4ab3-bac6-7e0a5234389e.gif) - D...",
+      "lines": 95,
+      "mtime": 1774800080662
+    },
+    {
+      "path": "_private/ctk_repos/CTkTreeview/README.md",
+      "title": "CTkTreeview",
+      "summary": "A Treeview widget for customtkinter (extension/add-on). This package is built off of the idea from https://github.com/TomSchimansky/CustomTkinter/discussions/1821. Credit goes to @avalon60 for the ...",
+      "lines": 57,
+      "mtime": 1774800091416
+    },
+    {
+      "path": "_private/ctk_repos/CTkXYFrame/README.md",
+      "title": "CTkXYFrame",
+      "summary": "**A better scrollable frame for customtkinter!** ![Screenshot](https://github.com/Akascape/CTkXYFrame/assets/89206401/859b6733-3c91-4093-a511-d6f1060a18ca) - Both x and y scrollability at the same ...",
+      "lines": 32,
+      "mtime": 1774800081360
+    },
+    {
+      "path": "_private/ctk_repos/CustomTkinter/CHANGELOG.md",
+      "title": "Changelog",
+      "summary": "All notable changes to this project will be documented in this file! The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versionin...",
+      "lines": 91,
+      "mtime": 1774800073525
+    },
+    {
+      "path": "_private/ctk_repos/CustomTkinterCodeViewer/README.md",
+      "title": "CustomTkinter CodeViewer",
+      "summary": "```zsh pip install CustomtkinterCodeViewer ``` This is a package for displaying code with syntax highlighting in a customtkinter application ![CTkCodeViewer](https://github.com/rigvedmaanas/CustomT...",
+      "lines": 35,
+      "mtime": 1774800121479
+    },
+    {
+      "path": "_private/ctk_repos/guitk/CHANGELOG.md",
+      "title": "Changelog",
+      "summary": "All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versionin...",
+      "lines": 36,
+      "mtime": 1774800097826
+    },
+    {
+      "path": "_private/ctk_repos/guitk/README.md",
+      "title": "Python GUI Toolkit for TK (GUITk)",
+      "summary": "<!--* DO NOT EDIT README.md, instead edit README.mdpp and process with MarkdownPP using doit (see dodo.py) --> GUITk is a declarative framework for building nice-looking, cross-platform GUIs with [...",
+      "lines": 228,
+      "mtime": 1774800097826
+    },
+    {
+      "path": "_private/ctk_repos/guitk/tests/README.md",
+      "title": "GUITk Tests",
+      "summary": "This directory contains tests for the GUITk library.  The tests are run with pytest. `pytest` will run all the tests in the `tests` directory. The tests are interactive and require user input. Each...",
+      "lines": 14,
+      "mtime": 1774800097835
+    },
+    {
+      "path": "_private/ctk_repos/guitk/utils/README.md",
+      "title": "Utilities",
+      "summary": "These are utilities for use while developing GUITk. Take screenshots of a GUITk Window and save them to a file. ``` usage: screenshot.py [-h] [--overwrite] [--delay DELAY] file classname output Tak...",
+      "lines": 23,
+      "mtime": 1774800097837
+    },
+    {
+      "path": "_private/ctk_repos/kreka-ctk/README.md",
+      "title": "Kreka (CTk)",
+      "summary": "Simple Browser on CTk! - Simple URL navigation. - Simple UI. - Basic HTML and CSS render. You can install Kreka (CTk) via [Pix](https://github.com/progwi0/pix)! (or you can download Kreka (CTk) in ...",
+      "lines": 15,
+      "mtime": 1774800120218
+    },
+    {
+      "path": "_private/ctk_repos/MoreCustomTkinterWidgets/README.md",
+      "title": "MoreCustomTkinterWidgets",
+      "summary": "By Fastattack, 2024 [![Pypi](https://img.shields.io/pypi/v/MoreCustomTkinterWidgets?label=Pypi)](https://pypi.org/project/MoreCustomTkinterWidgets) [![GitHub - Total commits](https://img.shields.io...",
+      "lines": 90,
+      "mtime": 1774800106942
+    },
+    {
+      "path": "_private/ctk_repos/SlickCTk/README.md",
+      "title": "SlickCTk",
+      "summary": "Additional widgets and biased defaults to extend CustomTKinter (work in progress). \"Right-click\" / context menus. - Easy to create - just pass in a dictionary with button names and functions. (`dic...",
+      "lines": 29,
+      "mtime": 1774800100502
+    },
+    {
+      "path": "_private/ctk_repos/tkcap/README.md",
+      "title": "Requirements and Tested Platforms",
+      "summary": "``` __      __ /  |    /  | _$$ |_   $$ |   __   _______   ______    ______ / $$   |  $$ |  /  | /       | /      \\  /      \\ $$$$$$/   $$ |_/$$/ /$$$$$$$/  $$$$$$  |/$$$$$$  | $$ | __ $$   $$<  $$...",
+      "lines": 60,
+      "mtime": 1774800107648
+    },
+    {
+      "path": "_private/ctk_repos/tkinter_colored_logging_handlers/README.md",
+      "title": "tkinter_colored_logging_handlers",
+      "summary": "A Tkinter logging handler that supports ANSI colored output. ![1693492901002](image/README/1693492901002.png) ```bash pip install tkinter_colored_logging_handlers ``` ```python from tkinter_colored...",
+      "lines": 45,
+      "mtime": 1774800106024
+    },
+    {
+      "path": "_private/ctk_repos/tkinter_kit/CHANGELOG.md",
+      "title": "CHANGELOG.md",
+      "summary": "- correction of some incoherences - Simplification of access to functions by bypassing func in importation!",
+      "lines": 8,
+      "mtime": 1774800093697
+    },
+    {
+      "path": "_private/ctk_repos/tkinter_kit/README.md",
+      "title": "TKinter-Kit 📦",
+      "summary": "This project aims to provide a rich set of helpful functions, to easily use the tkinter module, to have a better graphical user interface experience * It contains functions to easily interact with ...",
+      "lines": 88,
+      "mtime": 1774800093697
+    },
+    {
+      "path": "_private/ctk_repos/tkinter_page/README.md",
+      "title": "tkinter_page",
+      "summary": "![tkp logo](./picture/tkinter_page_logo.png) Tkinter_page is based on tkinter. It contains several frames that used in spcific area. You can build you user interface faster with tkinter_page. ``` P...",
+      "lines": 199,
+      "mtime": 1774800084635
+    },
+    {
+      "path": "_private/ctk_repos/tkinter-layout-helpers/README.md",
+      "title": "Tkinter Layout Helpers",
+      "summary": "[![Python package](https://github.com/insolor/tkinter-layout-helpers/actions/workflows/python-tests.yml/badge.svg)](https://github.com/insolor/tkinter-layout-helpers/actions/workflows/python-tests....",
+      "lines": 83,
+      "mtime": 1774800112185
+    },
+    {
+      "path": "_private/ctk_repos/tkinter-nav/README.md",
+      "title": "Use as any Frame",
+      "summary": "<div align=center> <h1>Tkinter-nav</h1> <h3>Navigation wrapper for Tkinter.</h3> </div> ``` pip install tkinter-nav ``` ```python import tkinter as tk import tkinter_nav as tknav class PageOne(tkna...",
+      "lines": 166,
+      "mtime": 1774800117145
+    },
+    {
+      "path": "_private/ctk_repos/tkinter-tooltip/CONTRIBUTING.md",
+      "title": "Contributing",
+      "summary": "👍🎉 Thank you for taking the time to contribute! 🎉👍 In this file you will find all the steps necessary to guide you through your first contribution to the project. Please note our [Code of Condu...",
+      "lines": 70,
+      "mtime": 1774800108466
+    },
+    {
+      "path": "_private/ctk_repos/tkinter-tooltip/README.md",
+      "title": "tkinter-tooltip",
+      "summary": "<div align=\"center\"> [![Downloads](https://pepy.tech/badge/tkinter-tooltip)](https://pepy.tech/project/tkinter-tooltip) [![PyPI Latest Release](https://img.shields.io/pypi/v/tkinter-tooltip.svg)](h...",
+      "lines": 175,
+      "mtime": 1774800108466
+    },
+    {
+      "path": "_private/ctk_repos/tkinter-videoplayer/README.md",
+      "title": "tkinter-videoplayer",
+      "summary": "A simple video player component for Tkinter, built with OpenCV and Pillow. The current alternatives either didn't work (outdated dependencies) or used `av` (which requires compilation). - Batteries...",
+      "lines": 111,
+      "mtime": 1774800102746
+    },
+    {
+      "path": "_private/ctk_repos/tkinterdnd2/README.md",
+      "title": "register the listbox as a drop target",
+      "summary": "[Eliav2/tkinterdnd2](https://github.com/Eliav2/tkinterdnd2) is a fork of the (unmaintained) [pmgagne/tkinterdnd2](https://github.com/pmgagne/tkinterdnd2) which is a python wrapper for [tkdnd](https...",
+      "lines": 64,
+      "mtime": 1774800090130
+    },
+    {
+      "path": "_private/ctk_repos/TkinterWeb/README.md",
+      "title": "README.md",
+      "summary": "![PyPi Downloads](https://static.pepy.tech/badge/tkinterweb/month) ![MIT Licence](https://img.shields.io/pypi/l/tkinterweb) ![Python 3](https://img.shields.io/pypi/pyversions/tkinterweb) ![Made in ...",
+      "lines": 117,
+      "mtime": 1774800082379
+    },
+    {
+      "path": "_private/ctk_repos/ttk-text/CONTRIBUTING.md",
+      "title": "Contributing",
+      "summary": "Before contributing, please adhere to the [Code of Conduct](CODE_OF_CONDUCT.md), platform policies, and relevant laws and regulations. If you encounter problems during use or have suggestions for i...",
+      "lines": 60,
+      "mtime": 1774800109395
+    },
+    {
+      "path": "_private/ctk_repos/ttk-text/README.md",
+      "title": "Themed Tkinter Text",
+      "summary": "<div align=\"center\"> **Repository:** [![GitHub primary repository](https://img.shields.io/badge/GitHub-primary_repo-0969da?logo=github)][repository-github] [![GitCode secondary repository](https://...",
+      "lines": 289,
+      "mtime": 1774800109395
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-bs/README.md",
+      "title": "ttkbootstrap-icons-bs",
+      "summary": "Bootstrap Icons provider for ttkbootstrap-icons. ```bash pip install ttkbootstrap-icons-bs ``` ```python from ttkbootstrap_icons_bs import BootstrapIcon icon = BootstrapIcon(\"house\", size=24, color...",
+      "lines": 51,
+      "mtime": 1774800113657
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-devicon/README.md",
+      "title": "ttkbootstrap-icons-devicon",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Devicon provides brand and technology icons for programming languages and development tools. [![PyPI](https://img.shields.io/pypi/v/ttkbootstr...",
+      "lines": 67,
+      "mtime": 1774800113659
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-eva/README.md",
+      "title": "ttkbootstrap-icons-eva",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Eva Icons offers clean outline and filled variants for modern UIs. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-eva.svg)](https:/...",
+      "lines": 65,
+      "mtime": 1774800113664
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-fa/README.md",
+      "title": "ttkbootstrap-icons-fa",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Font Awesome Free offers large, well-known icon sets across solid, regular, and brand categories. [![PyPI](https://img.shields.io/pypi/v/ttkbo...",
+      "lines": 69,
+      "mtime": 1774800113665
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-fluent-reg/README.md",
+      "title": "ttkbootstrap-icons-fluent-reg",
+      "summary": "Fluent System Icons (Regular style only) provider for ttkbootstrap-icons. This is a lightweight package that includes only the Regular style from Microsoft's Fluent System Icons. If you need multip...",
+      "lines": 53,
+      "mtime": 1774800113669
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-fluent/README.md",
+      "title": "ttkbootstrap-icons-fluent",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Fluent System Icons by Microsoft provide regular and filled styles across many sizes. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icon...",
+      "lines": 66,
+      "mtime": 1774800113676
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-gmi/README.md",
+      "title": "ttkbootstrap-icons-gmi",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Google Material Icons offer baseline, outlined, round, sharp and twotone variants. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-g...",
+      "lines": 72,
+      "mtime": 1774800113688
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-ion/README.md",
+      "title": "ttkbootstrap-icons-ion",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Ionicons v2 provides a familiar set of UI glyphs as a single TTF font. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-ion.svg)](htt...",
+      "lines": 60,
+      "mtime": 1774800113696
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-lucide/README.md",
+      "title": "ttkbootstrap-icons-lucide",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Lucide Icons are crisp, outline-based glyphs that work well at various sizes. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-lucide...",
+      "lines": 60,
+      "mtime": 1774800113698
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-mat/README.md",
+      "title": "ttkbootstrap-icons-mat",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Material Design Icons (community) offers a large collection of UI glyphs as a single TTF. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-...",
+      "lines": 60,
+      "mtime": 1774800113701
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-meteocons/README.md",
+      "title": "ttkbootstrap-icons-meteocons",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Meteocons is a compact weather-themed icon font. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-meteocons.svg)](https://pypi.org/pr...",
+      "lines": 60,
+      "mtime": 1774800113706
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-remix/README.md",
+      "title": "ttkbootstrap-icons-remix",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Remix Icon offers modern, consistent line and filled variants. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-remix.svg)](https://p...",
+      "lines": 63,
+      "mtime": 1774800113708
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-rpga/README.md",
+      "title": "ttkbootstrap-icons-rpga",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. RPG Awesome is a fantasy-themed set of glyphs based on Font Awesome. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-rpga.svg)](http...",
+      "lines": 60,
+      "mtime": 1774800113710
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-simple/README.md",
+      "title": "ttkbootstrap-icons-simple",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Simple Icons provides brand logos as a simple, monochrome font. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-simple.svg)](https:/...",
+      "lines": 59,
+      "mtime": 1774800113712
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-typicons/README.md",
+      "title": "ttkbootstrap-icons-typicons",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Typicons is a versatile pictographic font with filled and outline styles. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-typicons.s...",
+      "lines": 65,
+      "mtime": 1774800113716
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons-weather/README.md",
+      "title": "ttkbootstrap-icons-weather",
+      "summary": "An icon provider for the `ttkbootstrap-icons` library. Weather Icons is a classic set of weather-related glyphs. [![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons-weather.svg)](https://pypi...",
+      "lines": 59,
+      "mtime": 1774800113717
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/packages/ttkbootstrap-icons/README.md",
+      "title": "ttkbootstrap-icons",
+      "summary": "[![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons.svg)](https://pypi.org/project/ttkbootstrap-icons/) [![Python Versions](https://img.shields.io/pypi/pyversions/ttkbootstrap-icons.svg)](htt...",
+      "lines": 90,
+      "mtime": 1774800113721
+    },
+    {
+      "path": "_private/ctk_repos/ttkbootstrap-icons/README.md",
+      "title": "ttkbootstrap-icons",
+      "summary": "[![PyPI](https://img.shields.io/pypi/v/ttkbootstrap-icons.svg)](https://pypi.org/project/ttkbootstrap-icons/) [![Python Versions](https://img.shields.io/pypi/pyversions/ttkbootstrap-icons.svg)](htt...",
+      "lines": 125,
+      "mtime": 1774800113643
+    },
+    {
+      "path": "CHANGELOG.md",
+      "title": "Changelog",
+      "summary": "Complete restructuring from a script-based project into a standard, installable Python package. - Reorganized entire codebase into `src/ctk_themio/` standard layout - Created `pyproject.toml` with ...",
+      "lines": 67,
+      "mtime": 1774794164581
+    },
+    {
+      "path": "CLAUDE.md",
+      "title": "CLAUDE.md",
+      "summary": "This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository. CTk Theme Builder (`ctk_themio`) is a GUI application for creating, designing, and managing cu...",
+      "lines": 108,
+      "mtime": 1774794236490
+    },
+    {
+      "path": "docs/3-panels.png",
+      "title": "3-panels.png",
+      "summary": "�PNG \u001a \u0000\u0000\u0000\rIHDR\u0000\u0000\u0006�\u0000\u0000\u0003�\b\u0002\u0000\u0000\u0000U\u001e��\u0000\u0000\u0000\u0003sBIT\b\b\b��O�\u0000\u0000\u0000\u0019tEXtSoftware\u0000gnome-screenshot�\u0003�>\u0000\u0000 \u0000IDATx���w|\u0014E\u001b\u0007�g�J.��BH\u0001\u0012H�Ko\"Mņ���H��(�R,/\u0016,��\"(��\u0002J�JK !\u0010�{������ǥ\\�K\u000f\u0010����ѻ���ٽ���s��0b2�Ǝ\u0013�D�^7\u0003\u0000\u0000\u0000\u0000�\f�X\u0015...",
+      "lines": 777,
+      "mtime": 1774790056105
+    },
+    {
+      "path": "docs/about.png",
+      "title": "about.png",
+      "summary": "�PNG \u001a \u0000\u0000\u0000\rIHDR\u0000\u0000\u0001~\u0000\u0000\u0001\u0012\b\u0006\u0000\u0000\u0000���\u0000\u0000\u0000\u0004sBIT\b\b\b\b|\bd�\u0000\u0000\u0000\u0019tEXtSoftware\u0000gnome-screenshot�\u0003�>\u0000\u0000 \u0000IDATx��y�dgQ����9�w�-3�L��J\u0016�\u0018v�\u0018�$,!�Q\u00041�l���\b�|QPğ *�N�\u0012\u0011\u0001!�\u0001A\b&J\b�\u0012�����}���3���>�S�?��szB 3I@�95�;�v�����...",
+      "lines": 282,
+      "mtime": 1774790056107
+    },
+    {
+      "path": "docs/cascade-confirm.png",
+      "title": "cascade-confirm.png",
+      "summary": "�PNG \u001a \u0000\u0000\u0000\rIHDR\u0000\u0000\u0001�\u0000\u0000\u0001\\\b\u0002\u0000\u0000\u0000d�\u000f\u0013\u0000\u0000\u0000\u0003sBIT\b\b\b��O�\u0000\u0000\u0000\u0019tEXtSoftware\u0000gnome-screenshot�\u0003�>\u0000\u0000 \u0000IDATx��w\\\u0014�\u0016���\u0016���,\b�������E\u0005\u0013{7��\u00015\u001a;��`C,Qc^\u0014Mb/`CD\u0010;�\u0011P��HS@z�ݝy,e�\u0002\u000bH`�|�W֝{�9�{g�\u001b�ˠ1\u00004\u0000�4\u0000\u0000�3������...",
+      "lines": 90,
+      "mtime": 1774790056107
+    },
+    {
+      "path": "docs/cascade1.png",
+      "title": "cascade1.png",
+      "summary": "�PNG \u001a \u0000\u0000\u0000\rIHDR\u0000\u0000\u0003�\u0000\u0000\u0002\u000b\b\u0002\u0000\u0000\u0000�g��\u0000\u0000\u0000\u0003sBIT\b\b\b��O�\u0000\u0000\u0000\u0019tEXtSoftware\u0000gnome-screenshot�\u0003�>\u0000\u0000 \u0000IDATx���w\\\u0013�\u001f\u0007��]\u0006{O\u0007*\"���Ug��V���=j�֟�Z�V���Z�Z�J���V\u0014�%(�\u0001({oHr��\u000f\u0010\u0011\u0002 \u0007���~�U���s��o�<��/_�P(�||�#be�Z���q\u001c...",
+      "lines": 211,
+      "mtime": 1774790056107
+    },
+    {
+      "path": "docs/cascade2.png",
+      "title": "cascade2.png",
+      "summary": "�PNG \u001a \u0000\u0000\u0000\rIHDR\u0000\u0000\u0003\u001d\u0000\u0000\u0001�\b\u0002\u0000\u0000\u0000HĒ\u001c\u0000\u0000\u0000\u0003sBIT\b\b\b��O�\u0000\u0000\u0000\u0019tEXtSoftware\u0000gnome-screenshot�\u0003�>\u0000\u0000 \u0000IDATx���w�\u0014E�\u0000��w6�\u0004��s�*\u0018\u0000#���y�3�y��\u0017�3�\u0007f\u0011\u0005\u0015T\u0014$�H�qY6�8;9����\u0003TT�]\\������lO��w�j�p��\t\b\u0000\u0000\u0000\u0000\u0000\\�p�+��\u0005|���)\u0001...",
+      "lines": 355,
+      "mtime": 1774790056108
+    },
+    {
+      "path": "docs/cascade3.png",
+      "title": "cascade3.png",
+      "summary": "�PNG \u001a \u0000\u0000\u0000\rIHDR\u0000\u0000\u0003\u0019\u0000\u0000\u0002\u0004\b\u0002\u0000\u0000\u0000��tY\u0000\u0000\u0000\u0003sBIT\b\b\b��O�\u0000\u0000\u0000\u0019tEXtSoftware\u0000gnome-screenshot�\u0003�>\u0000\u0000 \u0000IDATx���wx\u0016E�\u0000��}��=ozo@B�w�E\u0005E���)z��lw���+��γW\u0014,�(H\u0015齆�ޓ7y���ۖ�\u001f���&\u0011�����ȓ���dwg����;��NB\u0000\u0000\u0000\u0000\u0000�[�K�\u0001\u0000\u0000\u0000\u0000�\u001e\f...",
+      "lines": 384,
+      "mtime": 1774790056108
+    }
+  ]
+}

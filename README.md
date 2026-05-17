@@ -1,135 +1,12 @@
+# ctk_themio
 
-# CTk Themio (`ctk_themio`)
+Visual theme editor for [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter). Design a theme, see it immediately on every widget type, save it as JSON.
 
-Visual theme editor for the CustomTkinter package. Design, preview, and manage custom themes with a WYSIWYG interface.
+## What CustomTkinter theming is
 
-- Uvx install: [https://uvx.sh/ctk_themio/](https://uvx.sh/ctk_themio/)
-- PyPI: [https://pypi.org/p/ctk_themio](http://pypi.org/p/ctk_themio)
-- GitHub source: [https://github.com/twardoch/ctk_themio](https://github.com/twardoch/ctk_themio)
-- Uses [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter)
-- Based on [CTk Theme Builder](https://github.com/avalon60/ctk_theme_builder) by Clive Bostock
+CustomTkinter is a modern Python GUI library that wraps Tkinter with a cleaner look and dark mode support. Its appearance is controlled by JSON theme files: a set of color and geometry values for each widget type, specified separately for light and dark mode.
 
-## Installation
-
-### macOS / Linux
-
-```sh
-curl -LsSf uvx.sh/ctk_themio/install.sh | sh && ctk-themio
-```
-
-### Windows 
-
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://uvx.sh/fontmake/install.ps1 | iex"
-ctk-themio
-```
-
-### Universal
-
-If you have Python 3.13 or newer and `uv` installed: 
-
-#### Run the CTK Themio app
-
-```bash
-uvx --from ctk_themio ctk-themio
-```
-
-#### Run the CTK Themio Demo app
-
-```bash
-uvx --from ctk_themio ctk-themio-demo
-```
-
-### Install into Python
-
-```
-uv pip install --system ctk_themio
-```
-
-### From source
-
-```bash
-git clone https://github.com/twardoch/ctk_themio.git
-cd ctk_themio
-uv pip install -e .
-```
-
-## Usage
-
-```bash
-# Launch the theme editor
-ctk-themio
-
-# Launch in preview-only mode with a specific theme
-ctk-themio -a Dark -t path/to/theme.json
-
-# Run as a Python module
-python -m ctk_themio
-
-# Launch the widget demo showcase
-ctk-themio-demo
-```
-
-### Command-line options
-
-| Option | Description |
-|--------|-------------|
-| `-a`, `--set-appearance` | Set appearance mode: `Dark` or `Light` (default: `Dark`) |
-| `-t`, `--set-theme` | Path to a theme JSON file. Launches preview-only mode. |
-
-## Features
-
-### Visual Theme Editing
-
-Make changes and see the effects instantly across all 18+ CustomTkinter widget types. The live preview panel updates as you adjust colors, borders, corner radii, and spacing.
-
-Supported widgets: 
-
-- CTk
-- CTkToplevel
-- CTkFrame
-- CTkScrollableFrame
-- CTkButton
-- CTkLabel
-- CTkEntry
-- CTkComboBox
-- CTkOptionMenu
-
-### Light and Dark Modes
-
-Every theme property supports dual values for light and dark appearance modes. Switch between modes instantly to verify your theme works in both contexts. A "render as disabled" mode lets you preview how widgets look when disabled.
-
-### Color Tools
-
-- **Color Palettes**: Associate a palette with each theme for quick access to your chosen colors. Copy and paste colors between elements with single-click paste mode.
-- **Color Harmonics**: Generate complementary, analogous, triadic, and other color schemes from a base color using the Harmonics dialog.
-- **Shade Adjustment**: Fine-tune color shades with configurable differential steps.
-- **Auto Contrast**: Automatically adjust text colors for readability against their background.
-- **Color Cascade**: Apply a palette color to multiple related widget properties at once.
-
-### Widget Geometry
-
-Edit borders, corner radii, button lengths, and spacing through the dedicated Geometry dialog. Changes propagate to the live preview immediately.
-
-### Theme Management
-
-- **Merge and Swap**: Combine elements from different themes or swap color palettes between themes.
-- **Provenance**: Track theme metadata including author, creation date, modification date, and notes.
-- **Import/Export**: Import themes from and export themes to JSON files.
-- **Built-in Themes**: Ships with 14 ready-to-use themes: Anthracite, Blue, DaynNight, GhostTrain, Green, Greengage, GreyGhost, Hades, Harlequin, MoonlitSky, NightTrain, Oceanix, TrojanBlue, and more.
-
-### User Preferences
-
-Preferences persist across sessions via SQLite. Configurable options include:
-- Auto-load last theme on start
-- Enable/disable tooltips
-- Widget scaling per panel (Control Panel, Preview, QA)
-- Logging level and format
-- Network listener port for QA testing
-
-## Theme Format
-
-Themes are JSON files mirroring the CustomTkinter widget property structure:
+A theme file looks like this:
 
 ```json
 {
@@ -137,87 +14,76 @@ Themes are JSON files mirroring the CustomTkinter widget property structure:
     "fg_color": ["#3B8ED0", "#1F6AA5"],
     "hover_color": ["#36719F", "#144870"],
     "border_color": ["#3E454A", "#949A9F"],
-    "text_color": ["#DCE4EE", "#DCE4EE"],
-    "text_color_disabled": ["gray74", "gray60"],
-    "corner_radius": 6,
-    "border_width": 0
+    "border_width": 0,
+    "corner_radius": 6
   }
 }
 ```
 
-Color values can be `[light_mode, dark_mode]` pairs or single values. Properties are split into color properties (fg_color, bg_color, hover_color, text_color, etc.) and geometry properties (border_width, corner_radius, button_length, etc.).
+The first value in each pair is the light-mode color; the second is the dark-mode color. There are 18+ widget types, each with multiple color and geometry properties. Editing this by hand is tedious and hard to visualise.
 
-## Data Locations
+## What ctk_themio does
 
-User data is stored in OS-appropriate directories via [platformdirs](https://pypi.org/project/platformdirs/):
+It gives you a panel with color pickers and sliders on the left and a live preview panel showing all 18+ widgets on the right. Change a color; the preview updates immediately. Export the JSON when you are happy.
 
-| Data | macOS | Linux | Windows |
-|------|-------|-------|---------|
-| Database, palettes, user themes | `~/Library/Application Support/ctk_themio/` | `~/.local/share/ctk_themio/` | `%LOCALAPPDATA%\twardoch\ctk_themio` |
-| Logs | `~/Library/Logs/ctk_themio/` | `~/.local/state/ctk_themio/log/` | `%LOCALAPPDATA%\twardoch\ctk_themio\Logs` |
-| Cache/temp | `~/Library/Caches/ctk_themio/` | `~/.cache/ctk_themio/` | `%LOCALAPPDATA%\twardoch\ctk_themio\Cache` |
+Additional features:
 
-On first run, bundled sample themes are copied to the user themes directory.
+- **Color harmonics**: generate complementary, analogous, or triadic palettes from a base color
+- **Theme merging**: combine properties from two theme files
+- **Import/export**: load any existing CustomTkinter JSON theme for editing
+- **Undo/redo**: full command stack for non-destructive editing
+- **Geometry editing**: adjust corner radii and border widths with sliders
+
+## Install
+
+Requires Python 3.13+.
+
+```bash
+pip install ctk_themio
+# or
+uv pip install ctk_themio
+```
+
+### macOS / Linux
+
+```bash
+curl -LsSf uvx.sh/ctk_themio/install.sh | sh && ctk-themio
+```
+
+## Run
+
+```bash
+# Open the full theme editor
+ctk-themio
+
+# Open in preview-only mode with a specific appearance and theme
+ctk-themio -a Dark -t my_theme.json
+
+# Run the widget showcase demo
+ctk-themio-demo
+```
+
+## Theme file format
+
+Themes are JSON files stored in `~/.local/share/ctk_themio/themes/` (Linux), `~/Library/Application Support/ctk_themio/themes/` (macOS), or the equivalent Windows path. The built-in themes live inside the package and are copied to the user directory on first run.
+
+Color values are `[light, dark]` pairs (hex strings). Geometry values are numbers. Both are stored in the same file and can be edited independently.
 
 ## Architecture
 
-The application follows the **MVC pattern**:
+The application follows an MVC pattern:
 
-- **`controller/`** - Entry point with CLI argument parsing. Launches the editor or preview-only mode.
-- **`model/`** - Core business logic: theme loading/saving, undo/redo (`CommandStack`), preferences database (SQLite), color operations.
-- **`view/`** - GUI components: main control panel, live preview panel, and dialogs for color harmonics, geometry editing, preferences, import/export, theme merging, and provenance.
-- **`utils/`** - Color utilities (hex/rgb conversion, shading, contrast calculations), named color constants, logging.
-- **`assets/`** - Bundled read-only data: built-in themes, view schemas, configuration, images.
-- **`demo/`** - Widget showcase application with 13 interactive tabs.
-- **`paths.py`** - Centralized path definitions using platformdirs.
+- **Controller** (`controller/ctk_theme_builder.py`): parses CLI args, launches the correct window
+- **Model** (`model/ctk_theme_builder.py`): theme loading/saving, undo/redo command stack, property change tracking
+- **View** (`view/`): control panel (~2500 lines), live preview panel (~1300 lines), and a set of dialogs for harmonics, geometry, preferences, and merging
+- **Utils** (`utils/cbtk_kit.py`): color manipulation — hex/RGB conversion, lightness adjustment, contrast checking
 
-## Development
+User preferences are stored in a SQLite database (auto-initialized on first run) via `model/preferences.py`. This tracks last-used theme, appearance mode, window geometry, and saved color palettes.
 
-```bash
-# Clone and install in development mode
-git clone https://github.com/twardoch/ctk_themio.git
-cd ctk_themio
-uv pip install -e .
+## Based on
 
-# Build wheel and sdist
-uvx hatch build
-
-# Publish to PyPI
-./publish.sh
-```
-
-### Build System
-
-- **Build backend**: [hatchling](https://hatch.pypa.io/) with [hatch-vcs](https://github.com/ofek/hatch-vcs) for version management
-- **Version**: Derived from git tags (semantic versioning)
-- **Package layout**: `src/ctk_themio/` (standard src layout)
-
-### Dependencies
-
-| Package | Purpose |
-|---------|---------|
-| `customtkinter` | Modern Tkinter GUI framework |
-| `colorharmonies` | Color harmony/scheme generation |
-| `loguru` | Structured logging |
-| `matplotlib` | Color utilities and validation |
-| `pillow` | Image handling |
-| `pyperclip` | Clipboard operations |
-| `platformdirs` | OS-appropriate data directories |
-| `CTkMessagebox` | Message dialog widget |
-| `CTkToolTip` | Tooltip widget |
-| `darkdetect` | OS dark mode detection |
-| `fonttools` | Font manipulation |
-| `pathvalidate` | Path validation |
-| `numpy` | Numerical operations (matplotlib dependency) |
-| `colour` | Color parsing |
-
-## Credits
-
-Originally created by **Clive Bostock**. Now maintained by **Adam Twardoch**.
-
-Thanks to Tom Schimansky for [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter), and to Akash Bora for [CTkToolTip](https://github.com/Akascape/CTkToolTip) and [CTkMessagebox](https://github.com/Akascape/CTkMessagebox).
+`ctk_themio` is a repackaged and updated version of [CTk Theme Builder](https://github.com/avalon60/ctk_theme_builder) by Clive Bostock, published under MIT license.
 
 ## License
 
-[MIT](LICENSE)
-
+MIT
