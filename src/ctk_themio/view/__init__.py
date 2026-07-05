@@ -2,7 +2,7 @@
 """
 UI Components and Views for CTk Theme Builder.
 
-This package contains all the visual elements of the application, built with 
+This package contains all the visual elements of the application, built with
 CustomTkinter.
 
 Key modules:

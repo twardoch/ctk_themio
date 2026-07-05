@@ -2,8 +2,8 @@
 """
 CTk Theme Builder: A visual theme editor for CustomTkinter applications.
 
-This package provides a WYSIWYG editor to create, modify, and preview themes 
-for the CustomTkinter UI framework. It supports live preview across all 18+ 
+This package provides a WYSIWYG editor to create, modify, and preview themes
+for the CustomTkinter UI framework. It supports live preview across all 18+
 built-in widgets, color harmonic generation, and theme merging.
 
 Entry points:
@@ -13,6 +13,7 @@ Entry points:
 
 try:
     from importlib.metadata import version
+
     __version__ = version("ctk_themio")
 except Exception:
     __version__ = "0.0.0"

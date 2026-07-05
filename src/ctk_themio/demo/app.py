@@ -6,7 +6,6 @@ import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog
 from typing import Any
-import json
 
 try:
     import customtkinter as ctk  # type: ignore[import-untyped]
@@ -19,14 +18,24 @@ def warn_import(name: str, exc: Exception) -> None:  # noqa: ARG001
 
 
 try:
-    from ctk_components import CTkCarousel, CTkLoader, CTkPopupMenu, CTkProgressPopup, do_popup  # type: ignore[import-untyped]
+    from ctk_components import (  # type: ignore[import-untyped]
+        CTkCarousel,
+        CTkLoader,
+        CTkPopupMenu,
+        CTkProgressPopup,
+        do_popup,
+    )
 except ImportError as exc:
     warn_import("ctkcomponents", exc)
     CTkCarousel = CTkLoader = CTkPopupMenu = CTkProgressPopup = None  # type: ignore[assignment]
     do_popup = None  # type: ignore[assignment]
 
 try:
-    from CTkMenuBarPlus import CTkMenuBar, CustomDropdownMenu, ContextMenu  # type: ignore[import-untyped]
+    from CTkMenuBarPlus import (  # type: ignore[import-untyped]
+        ContextMenu,
+        CTkMenuBar,
+        CustomDropdownMenu,
+    )
 except ImportError as exc:
     warn_import("CTkMenuBarPlus", exc)
     CTkMenuBar = CustomDropdownMenu = ContextMenu = None  # type: ignore[assignment]
@@ -38,7 +47,7 @@ except ImportError as exc:
     CTkToolTip = None  # type: ignore[assignment]
 
 try:
-    from MoreCustomTkinterWidgets import Separator, BetterCTkImage  # type: ignore[import-untyped]
+    from MoreCustomTkinterWidgets import BetterCTkImage, Separator  # type: ignore[import-untyped]
 except ImportError as exc:
     warn_import("MoreCustomTkinterWidgets", exc)
     Separator = BetterCTkImage = None  # type: ignore[assignment]
@@ -80,8 +89,8 @@ except ImportError as exc:
     HtmlFrame = None  # type: ignore[assignment]
 
 try:
-    from tkinter_layout_helpers.grid_helper import grid_manager  # type: ignore[import-untyped]
     from tkinter_layout_helpers import pack_manager  # type: ignore[import-untyped]
+    from tkinter_layout_helpers.grid_helper import grid_manager  # type: ignore[import-untyped]
 except ImportError as exc:
     warn_import("tkinter-layout-helpers", exc)
     grid_manager = pack_manager = None  # type: ignore[assignment]
@@ -145,14 +154,17 @@ except ImportError as exc:
 
 try:
     from ttk_text import ThemedText  # type: ignore[import-untyped]
-    from ttk_text.scrolled_text import ScrolledText as TtkScrolledText  # type: ignore[import-untyped]
+    from ttk_text.scrolled_text import (
+        ScrolledText as TtkScrolledText,  # type: ignore[import-untyped]
+    )
 except ImportError as exc:
     warn_import("ttk-text", exc)
     ThemedText = TtkScrolledText = None  # type: ignore[assignment]
 
+
 def replace_theme_colors(d, replacements):
     """Recursively replace color values in a customtkinter theme dict in-place.
-    
+
     replacements: dict mapping old_color -> new_color (case-insensitive matching)
     """
     lower_map = {k.lower(): v for k, v in replacements.items()}
@@ -165,9 +177,6 @@ def replace_theme_colors(d, replacements):
                     val[i] = lower_map[item.lower()]
         elif isinstance(val, str) and val.lower() in lower_map:
             d[key] = lower_map[val.lower()]
-
-
-
 
 
 TAB_NAMES: list[str] = [
@@ -202,7 +211,9 @@ class InlineLoaderOverlay:
         self.panel.place(relx=0.5, rely=0.5, anchor="center")
         self.panel.pack_propagate(False)
 
-        self.label = ctk.CTkLabel(self.panel, text="Loading", font=ctk.CTkFont(size=16, weight="bold"))
+        self.label = ctk.CTkLabel(
+            self.panel, text="Loading", font=ctk.CTkFont(size=16, weight="bold")
+        )
         self.label.pack(pady=(26, 8))
 
         self.progress = ctk.CTkProgressBar(self.panel, mode="indeterminate", width=180)
@@ -458,7 +469,9 @@ class CtkMegaDemo(ctk.CTk):
         # -- Help menu (scrollable) -----------------------------------
         help_btn = self.menu_bar.add_cascade(text="Help")
         help_menu = CustomDropdownMenu(widget=help_btn, width=260, font=ui_font)
-        help_menu.add_option(option="About ThemeManager", command=self.show_theme_info, accelerator="F1")
+        help_menu.add_option(
+            option="About ThemeManager", command=self.show_theme_info, accelerator="F1"
+        )
         help_menu.add_option(
             option="About Async",
             command=lambda: self.set_status("See Async Demo tab"),
@@ -579,9 +592,9 @@ class CtkMegaDemo(ctk.CTk):
             self._build_sidebar_fallback()
 
     def _build_sidebar_fallback(self) -> None:
-        ctk.CTkLabel(self.sidebar_holder, text="Navigation", font=ctk.CTkFont(size=16, weight="bold")).pack(
-            padx=8, pady=(10, 6)
-        )
+        ctk.CTkLabel(
+            self.sidebar_holder, text="Navigation", font=ctk.CTkFont(size=16, weight="bold")
+        ).pack(padx=8, pady=(10, 6))
         button_frame = ctk.CTkScrollableFrame(self.sidebar_holder, corner_radius=8)
         button_frame.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 8))
         for tab_name in TAB_NAMES:
@@ -728,7 +741,9 @@ class CtkMegaDemo(ctk.CTk):
         draw_dark.rectangle((4, 4, 86, 38), outline="#86c6ff", width=2)
         draw_dark.text((19, 12), "Demo", fill="#86c6ff")
 
-        self.core_ctk_image = ctk.CTkImage(light_image=pil_light, dark_image=pil_dark, size=(90, 42))
+        self.core_ctk_image = ctk.CTkImage(
+            light_image=pil_light, dark_image=pil_dark, size=(90, 42)
+        )
         image_holder = ctk.CTkLabel(left, text="", image=self.core_ctk_image)
         image_holder.pack(anchor="w", padx=12, pady=(2, 8))
 
@@ -740,12 +755,18 @@ class CtkMegaDemo(ctk.CTk):
                     size=(100, 50),
                     rounded_corner_radius=12,
                 )
-                ctk.CTkLabel(left, text="", image=self.better_img).pack(anchor="w", padx=12, pady=(0, 8))
+                ctk.CTkLabel(left, text="", image=self.better_img).pack(
+                    anchor="w", padx=12, pady=(0, 8)
+                )
             except Exception as exc:
                 warn_import("BetterCTkImage runtime", exc)
-                ctk.CTkLabel(left, text="[BetterCTkImage failed at runtime]").pack(anchor="w", padx=12, pady=(0, 8))
+                ctk.CTkLabel(left, text="[BetterCTkImage failed at runtime]").pack(
+                    anchor="w", padx=12, pady=(0, 8)
+                )
         else:
-            ctk.CTkLabel(left, text="[BetterCTkImage unavailable]").pack(anchor="w", padx=12, pady=(0, 8))
+            ctk.CTkLabel(left, text="[BetterCTkImage unavailable]").pack(
+                anchor="w", padx=12, pady=(0, 8)
+            )
 
         self.core_entry = ctk.CTkEntry(left, placeholder_text="CTkEntry input")
         self.core_entry.pack(fill=tk.X, padx=12, pady=4)
@@ -757,7 +778,9 @@ class CtkMegaDemo(ctk.CTk):
         controls = ctk.CTkFrame(right)
         controls.pack(fill=tk.BOTH, expand=True, padx=12, pady=12)
 
-        self.core_checkbox = ctk.CTkCheckBox(controls, text="CTkCheckBox", variable=self.checkbox_var)
+        self.core_checkbox = ctk.CTkCheckBox(
+            controls, text="CTkCheckBox", variable=self.checkbox_var
+        )
         self.core_checkbox.pack(anchor="w", pady=5)
 
         self.core_radio_a = ctk.CTkRadioButton(
@@ -797,16 +820,24 @@ class CtkMegaDemo(ctk.CTk):
         self.core_progress.pack(fill=tk.X, pady=6)
         self.core_progress.set(self.progress_var.get())
 
-        self.slider_status = ctk.CTkLabel(controls, text=f"Slider Value: {self.slider_var.get():.0f}")
+        self.slider_status = ctk.CTkLabel(
+            controls, text=f"Slider Value: {self.slider_var.get():.0f}"
+        )
         self.slider_status.pack(anchor="w", pady=(2, 6))
 
-        self.open_dialog_button = ctk.CTkButton(controls, text="Open CTkInputDialog", command=self.show_input_dialog)
+        self.open_dialog_button = ctk.CTkButton(
+            controls, text="Open CTkInputDialog", command=self.show_input_dialog
+        )
         self.open_dialog_button.pack(fill=tk.X, pady=4)
 
-        self.open_toplevel_button = ctk.CTkButton(controls, text="Open CTkToplevel", command=self.open_toplevel_demo)
+        self.open_toplevel_button = ctk.CTkButton(
+            controls, text="Open CTkToplevel", command=self.open_toplevel_demo
+        )
         self.open_toplevel_button.pack(fill=tk.X, pady=4)
 
-        theme_btn = ctk.CTkButton(controls, text="ThemeManager Snapshot", command=self.show_theme_info)
+        theme_btn = ctk.CTkButton(
+            controls, text="ThemeManager Snapshot", command=self.show_theme_info
+        )
         theme_btn.pack(fill=tk.X, pady=4)
 
         self.add_ctk_tooltip(self.core_entry, "CTkEntry accepts text")
@@ -852,9 +883,13 @@ class CtkMegaDemo(ctk.CTk):
                 )
             except Exception as exc:
                 warn_import("CTkScrollableDropdown runtime", exc)
-                ctk.CTkLabel(top, text="[CTkScrollableDropdown failed at runtime]").pack(side=tk.LEFT, padx=8, pady=8)
+                ctk.CTkLabel(top, text="[CTkScrollableDropdown failed at runtime]").pack(
+                    side=tk.LEFT, padx=8, pady=8
+                )
         else:
-            ctk.CTkLabel(top, text="[CTkScrollableDropdown unavailable]").pack(side=tk.LEFT, padx=8, pady=8)
+            ctk.CTkLabel(top, text="[CTkScrollableDropdown unavailable]").pack(
+                side=tk.LEFT, padx=8, pady=8
+            )
 
         self.segmented = ctk.CTkSegmentedButton(
             top,
@@ -883,9 +918,9 @@ class CtkMegaDemo(ctk.CTk):
         ctk.CTkButton(controls, text="Delete Selected", command=self.delete_selected_listbox).pack(
             side=tk.LEFT, padx=4, pady=8
         )
-        ctk.CTkButton(controls, text="Activate #3", command=lambda: self.activate_listbox_index(2)).pack(
-            side=tk.LEFT, padx=4, pady=8
-        )
+        ctk.CTkButton(
+            controls, text="Activate #3", command=lambda: self.activate_listbox_index(2)
+        ).pack(side=tk.LEFT, padx=4, pady=8)
 
         if CTkListbox is not None:
             try:
@@ -937,61 +972,77 @@ class CtkMegaDemo(ctk.CTk):
         scroll_frame = ctk.CTkScrollableFrame(left_frame, width=380, height=420)
         scroll_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         for idx in range(1, 31):
-            ctk.CTkLabel(scroll_frame, text=f"Scrollable item {idx:02d}").pack(anchor="w", pady=3, padx=6)
+            ctk.CTkLabel(scroll_frame, text=f"Scrollable item {idx:02d}").pack(
+                anchor="w", pady=3, padx=6
+            )
 
         right_frame = ctk.CTkFrame(row)
         right_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(8, 0))
 
-        ctk.CTkLabel(right_frame, text="Separator demos", font=ctk.CTkFont(size=15, weight="bold")).pack(
-            anchor="w", padx=10, pady=(10, 6)
-        )
+        ctk.CTkLabel(
+            right_frame, text="Separator demos", font=ctk.CTkFont(size=15, weight="bold")
+        ).pack(anchor="w", padx=10, pady=(10, 6))
 
         if Separator is not None:
             try:
                 separator_host = ctk.CTkFrame(right_frame)
                 separator_host.pack(fill=tk.X, padx=10, pady=8)
                 ctk.CTkLabel(separator_host, text="Left").pack(side=tk.LEFT, padx=(0, 8))
-                Separator(separator_host, length=120, width=4, orientation="vertical").pack(side=tk.LEFT, padx=4)
+                Separator(separator_host, length=120, width=4, orientation="vertical").pack(
+                    side=tk.LEFT, padx=4
+                )
                 ctk.CTkLabel(separator_host, text="Right").pack(side=tk.LEFT, padx=(8, 0))
 
-                Separator(right_frame, length=260, width=4, orientation="horizontal").pack(fill=tk.X, padx=10, pady=10)
+                Separator(right_frame, length=260, width=4, orientation="horizontal").pack(
+                    fill=tk.X, padx=10, pady=10
+                )
             except Exception as exc:
                 warn_import("Separator runtime", exc)
         else:
-            ctk.CTkLabel(right_frame, text="Separator unavailable").pack(anchor="w", padx=10, pady=8)
+            ctk.CTkLabel(right_frame, text="Separator unavailable").pack(
+                anchor="w", padx=10, pady=8
+            )
 
         nested = ctk.CTkFrame(right_frame)
         nested.pack(fill=tk.BOTH, expand=True, padx=10, pady=(0, 10))
-        ctk.CTkLabel(nested, text="Nested CTkFrame inside container tab").pack(anchor="w", padx=8, pady=8)
+        ctk.CTkLabel(nested, text="Nested CTkFrame inside container tab").pack(
+            anchor="w", padx=8, pady=8
+        )
         ctk.CTkButton(
-            nested, text="Container Button", command=lambda: self.set_status("Container button clicked")
+            nested,
+            text="Container Button",
+            command=lambda: self.set_status("Container button clicked"),
         ).pack(anchor="w", padx=8, pady=4)
 
     def build_toggles_groups_tab(self, tab: ctk.CTkFrame) -> None:
         panel = ctk.CTkFrame(tab, corner_radius=10)
         panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        ctk.CTkLabel(panel, text="CTkToggleButton + CTkToggleGroup", font=ctk.CTkFont(size=18, weight="bold")).pack(
-            anchor="w", padx=12, pady=(12, 10)
-        )
+        ctk.CTkLabel(
+            panel, text="CTkToggleButton + CTkToggleGroup", font=ctk.CTkFont(size=18, weight="bold")
+        ).pack(anchor="w", padx=12, pady=(12, 10))
 
         self.toggle_state_label = ctk.CTkLabel(panel, text="ToggleButton state: False")
         self.toggle_state_label.pack(anchor="w", padx=12, pady=6)
 
         if CTkToggleButton is not None:
             try:
-                self.toggle_button = CTkToggleButton(panel, text="Toggle Me", command=self.on_toggle_button)
+                self.toggle_button = CTkToggleButton(
+                    panel, text="Toggle Me", command=self.on_toggle_button
+                )
                 self.toggle_button.pack(anchor="w", padx=12, pady=6)
 
-                ctk.CTkButton(panel, text="Programmatic Toggle", command=self.toggle_programmatically).pack(
-                    anchor="w", padx=12, pady=(2, 8)
-                )
+                ctk.CTkButton(
+                    panel, text="Programmatic Toggle", command=self.toggle_programmatically
+                ).pack(anchor="w", padx=12, pady=(2, 8))
             except Exception as exc:
                 warn_import("CTkToggleButton runtime", exc)
                 self.toggle_button = None
         else:
             self.toggle_button = None
-            ctk.CTkLabel(panel, text="CTkToggleButton unavailable").pack(anchor="w", padx=12, pady=8)
+            ctk.CTkLabel(panel, text="CTkToggleButton unavailable").pack(
+                anchor="w", padx=12, pady=8
+            )
 
         self.toggle_group_label = ctk.CTkLabel(panel, text="ToggleGroup value: none")
         self.toggle_group_label.pack(anchor="w", padx=12, pady=6)
@@ -1029,9 +1080,15 @@ class CtkMegaDemo(ctk.CTk):
 
         action_row = ctk.CTkFrame(top)
         action_row.pack(fill=tk.X, padx=12, pady=(0, 12))
-        ctk.CTkButton(action_row, text="Start Loader", command=self.start_loader).pack(side=tk.LEFT, padx=6, pady=8)
-        ctk.CTkButton(action_row, text="Stop Loader", command=self.stop_loader).pack(side=tk.LEFT, padx=6, pady=8)
-        ctk.CTkButton(action_row, text="Toggle Loader", command=self.toggle_loader).pack(side=tk.LEFT, padx=6, pady=8)
+        ctk.CTkButton(action_row, text="Start Loader", command=self.start_loader).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
+        ctk.CTkButton(action_row, text="Stop Loader", command=self.stop_loader).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
+        ctk.CTkButton(action_row, text="Toggle Loader", command=self.toggle_loader).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
 
         self.loader_state_label = ctk.CTkLabel(action_row, text="Loader: idle")
         self.loader_state_label.pack(side=tk.LEFT, padx=12, pady=8)
@@ -1046,7 +1103,9 @@ class CtkMegaDemo(ctk.CTk):
                 continue
             try:
                 src = Image.open(image_path)
-                self.carousel_images.append(ctk.CTkImage(light_image=src, dark_image=src, size=(560, 300)))
+                self.carousel_images.append(
+                    ctk.CTkImage(light_image=src, dark_image=src, size=(560, 300))
+                )
             except Exception as exc:
                 warn_import(f"carousel image {image_name}", exc)
 
@@ -1055,8 +1114,12 @@ class CtkMegaDemo(ctk.CTk):
 
         nav_row = ctk.CTkFrame(body, fg_color="transparent")
         nav_row.pack(anchor="w", padx=12, pady=(0, 12))
-        ctk.CTkButton(nav_row, text="◀ Prev", width=90, command=self.carousel_prev).pack(side=tk.LEFT, padx=(0, 6))
-        ctk.CTkButton(nav_row, text="Next ▶", width=90, command=self.carousel_next).pack(side=tk.LEFT, padx=(0, 10))
+        ctk.CTkButton(nav_row, text="◀ Prev", width=90, command=self.carousel_prev).pack(
+            side=tk.LEFT, padx=(0, 6)
+        )
+        ctk.CTkButton(nav_row, text="Next ▶", width=90, command=self.carousel_next).pack(
+            side=tk.LEFT, padx=(0, 10)
+        )
         self.carousel_indicator = ctk.CTkLabel(nav_row, text="0 / 0")
         self.carousel_indicator.pack(side=tk.LEFT)
 
@@ -1105,9 +1168,9 @@ class CtkMegaDemo(ctk.CTk):
         panel = ctk.CTkFrame(tab, corner_radius=10)
         panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        ctk.CTkLabel(panel, text="Progress + Popup widgets", font=ctk.CTkFont(size=18, weight="bold")).pack(
-            anchor="w", padx=12, pady=(12, 10)
-        )
+        ctk.CTkLabel(
+            panel, text="Progress + Popup widgets", font=ctk.CTkFont(size=18, weight="bold")
+        ).pack(anchor="w", padx=12, pady=(12, 10))
 
         btn_row = ctk.CTkFrame(panel)
         btn_row.pack(fill=tk.X, padx=12, pady=6)
@@ -1142,16 +1205,18 @@ class CtkMegaDemo(ctk.CTk):
         panel = ctk.CTkFrame(tab, corner_radius=10)
         panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        ctk.CTkLabel(panel, text="HtmlFrame (tkinterweb)", font=ctk.CTkFont(size=18, weight="bold")).pack(
-            anchor="w", padx=12, pady=(12, 6)
-        )
+        ctk.CTkLabel(
+            panel, text="HtmlFrame (tkinterweb)", font=ctk.CTkFont(size=18, weight="bold")
+        ).pack(anchor="w", padx=12, pady=(12, 6))
 
         controls = ctk.CTkFrame(panel)
         controls.pack(fill=tk.X, padx=12, pady=(0, 8))
         ctk.CTkButton(controls, text="Load Sample HTML", command=self.load_sample_html).pack(
             side=tk.LEFT, padx=6, pady=8
         )
-        ctk.CTkButton(controls, text="Load python.org", command=self.load_python_org).pack(side=tk.LEFT, padx=6, pady=8)
+        ctk.CTkButton(controls, text="Load python.org", command=self.load_python_org).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
 
         host = tk.Frame(panel, bg="#111111")
         host.pack(fill=tk.BOTH, expand=True, padx=12, pady=(0, 12))
@@ -1164,7 +1229,9 @@ class CtkMegaDemo(ctk.CTk):
             except Exception as exc:
                 warn_import("HtmlFrame runtime", exc)
                 self.html_frame = None
-                ctk.CTkLabel(panel, text="HtmlFrame failed to initialize").pack(anchor="w", padx=12, pady=8)
+                ctk.CTkLabel(panel, text="HtmlFrame failed to initialize").pack(
+                    anchor="w", padx=12, pady=8
+                )
         else:
             self.html_frame = None
             ctk.CTkLabel(panel, text="HtmlFrame unavailable").pack(anchor="w", padx=12, pady=8)
@@ -1173,9 +1240,11 @@ class CtkMegaDemo(ctk.CTk):
         panel = ctk.CTkFrame(tab, corner_radius=10)
         panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-        ctk.CTkLabel(panel, text="Media Player (tkinter-videoplayer)", font=ctk.CTkFont(size=18, weight="bold")).pack(
-            anchor="w", padx=12, pady=(12, 6)
-        )
+        ctk.CTkLabel(
+            panel,
+            text="Media Player (tkinter-videoplayer)",
+            font=ctk.CTkFont(size=18, weight="bold"),
+        ).pack(anchor="w", padx=12, pady=(12, 6))
 
         ctk.CTkLabel(
             panel,
@@ -1186,11 +1255,21 @@ class CtkMegaDemo(ctk.CTk):
         controls = ctk.CTkFrame(panel)
         controls.pack(fill=tk.X, padx=12, pady=(0, 8))
 
-        ctk.CTkButton(controls, text="Load Video", command=self.load_video_file).pack(side=tk.LEFT, padx=6, pady=8)
-        ctk.CTkButton(controls, text="Play", command=self.video_play).pack(side=tk.LEFT, padx=6, pady=8)
-        ctk.CTkButton(controls, text="Pause", command=self.video_pause).pack(side=tk.LEFT, padx=6, pady=8)
-        ctk.CTkButton(controls, text="Stop", command=self.video_stop).pack(side=tk.LEFT, padx=6, pady=8)
-        ctk.CTkButton(controls, text="Seek +5s", command=lambda: self.video_seek(5)).pack(side=tk.LEFT, padx=6, pady=8)
+        ctk.CTkButton(controls, text="Load Video", command=self.load_video_file).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
+        ctk.CTkButton(controls, text="Play", command=self.video_play).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
+        ctk.CTkButton(controls, text="Pause", command=self.video_pause).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
+        ctk.CTkButton(controls, text="Stop", command=self.video_stop).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
+        ctk.CTkButton(controls, text="Seek +5s", command=lambda: self.video_seek(5)).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
 
         self.video_info_label = ctk.CTkLabel(controls, text="No file loaded")
         self.video_info_label.pack(side=tk.LEFT, padx=12, pady=8)
@@ -1205,12 +1284,14 @@ class CtkMegaDemo(ctk.CTk):
             except Exception as exc:
                 warn_import("VideoPlayer runtime", exc)
                 self.video_player = None
-                ctk.CTkLabel(panel, text=f"VideoPlayer failed: {exc}").pack(anchor="w", padx=12, pady=8)
+                ctk.CTkLabel(panel, text=f"VideoPlayer failed: {exc}").pack(
+                    anchor="w", padx=12, pady=8
+                )
         else:
             self.video_player = None
-            ctk.CTkLabel(panel, text="VideoPlayer unavailable (tkinter-videoplayer not installed)").pack(
-                anchor="w", padx=12, pady=8
-            )
+            ctk.CTkLabel(
+                panel, text="VideoPlayer unavailable (tkinter-videoplayer not installed)"
+            ).pack(anchor="w", padx=12, pady=8)
 
         self.after(200, self.load_default_video)
 
@@ -1219,15 +1300,17 @@ class CtkMegaDemo(ctk.CTk):
         shell.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         ctk.CTkLabel(
-            shell, text="Layout Helpers + tkinter-kit + tkinter-page", font=ctk.CTkFont(size=18, weight="bold")
+            shell,
+            text="Layout Helpers + tkinter-kit + tkinter-page",
+            font=ctk.CTkFont(size=18, weight="bold"),
         ).pack(anchor="w", padx=12, pady=(12, 8))
 
         top_row = ctk.CTkFrame(shell)
         top_row.pack(fill=tk.X, padx=12, pady=6)
 
-        ctk.CTkButton(top_row, text="Open tkinter-kit table", command=self.show_tkk_table_window).pack(
-            side=tk.LEFT, padx=6, pady=8
-        )
+        ctk.CTkButton(
+            top_row, text="Open tkinter-kit table", command=self.show_tkk_table_window
+        ).pack(side=tk.LEFT, padx=6, pady=8)
 
         split = ctk.CTkFrame(shell)
         split.pack(fill=tk.BOTH, expand=True, padx=12, pady=(0, 12))
@@ -1237,13 +1320,17 @@ class CtkMegaDemo(ctk.CTk):
         right = ctk.CTkFrame(split)
         right.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(6, 0), pady=6)
 
-        ctk.CTkLabel(left, text="grid_manager + pack_manager demo").pack(anchor="w", padx=8, pady=(8, 4))
+        ctk.CTkLabel(left, text="grid_manager + pack_manager demo").pack(
+            anchor="w", padx=8, pady=(8, 4)
+        )
         tk_left_host = tk.Frame(left, bg="#252525", height=220)
         tk_left_host.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 8))
 
         self.build_layout_manager_demo(tk_left_host)
 
-        ctk.CTkLabel(right, text="tkinter-kit scrollbar + tkinter-page").pack(anchor="w", padx=8, pady=(8, 4))
+        ctk.CTkLabel(right, text="tkinter-kit scrollbar + tkinter-page").pack(
+            anchor="w", padx=8, pady=(8, 4)
+        )
         tk_right_host = tk.Frame(right, bg="#252525", height=220)
         tk_right_host.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 8))
 
@@ -1254,7 +1341,9 @@ class CtkMegaDemo(ctk.CTk):
         panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         ctk.CTkLabel(
-            panel, text="async-tkinter-loop + tkinter-async-execute", font=ctk.CTkFont(size=18, weight="bold")
+            panel,
+            text="async-tkinter-loop + tkinter-async-execute",
+            font=ctk.CTkFont(size=18, weight="bold"),
         ).pack(anchor="w", padx=12, pady=(12, 8))
 
         self.async_label = ctk.CTkLabel(panel, text="Async countdown not started")
@@ -1291,7 +1380,9 @@ class CtkMegaDemo(ctk.CTk):
             padx=6,
             pady=8,
         )
-        ctk.CTkButton(row2, text="tae.stop()", command=self.stop_tae_runtime).pack(side=tk.LEFT, padx=6, pady=8)
+        ctk.CTkButton(row2, text="tae.stop()", command=self.stop_tae_runtime).pack(
+            side=tk.LEFT, padx=6, pady=8
+        )
 
         self.tae_label = ctk.CTkLabel(panel, text="tae idle")
         self.tae_label.pack(anchor="w", padx=12, pady=(6, 10))
@@ -1311,13 +1402,15 @@ class CtkMegaDemo(ctk.CTk):
         panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         ctk.CTkLabel(
-            panel, text="Bootstrap Icons (ttkbootstrap-icons-bs)", font=ctk.CTkFont(size=18, weight="bold")
+            panel,
+            text="Bootstrap Icons (ttkbootstrap-icons-bs)",
+            font=ctk.CTkFont(size=18, weight="bold"),
         ).pack(anchor="w", padx=12, pady=(12, 8))
 
         if BootstrapIcon is None:
-            ctk.CTkLabel(panel, text="BootstrapIcon unavailable (install ttkbootstrap-icons-bs)").pack(
-                anchor="w", padx=12, pady=8
-            )
+            ctk.CTkLabel(
+                panel, text="BootstrapIcon unavailable (install ttkbootstrap-icons-bs)"
+            ).pack(anchor="w", padx=12, pady=8)
             return
 
         controls = ctk.CTkFrame(panel)
@@ -1325,7 +1418,9 @@ class CtkMegaDemo(ctk.CTk):
 
         self._icon_size_var = tk.IntVar(value=32)
         ctk.CTkLabel(controls, text="Size:").pack(side=tk.LEFT, padx=(6, 2))
-        size_slider = ctk.CTkSlider(controls, from_=16, to=64, number_of_steps=6, variable=self._icon_size_var)
+        size_slider = ctk.CTkSlider(
+            controls, from_=16, to=64, number_of_steps=6, variable=self._icon_size_var
+        )
         size_slider.pack(side=tk.LEFT, padx=6)
         self._icon_size_label = ctk.CTkLabel(controls, text="32")
         self._icon_size_label.pack(side=tk.LEFT, padx=(0, 12))
@@ -1333,12 +1428,15 @@ class CtkMegaDemo(ctk.CTk):
         self._icon_style_var = tk.StringVar(value="outline")
         ctk.CTkLabel(controls, text="Style:").pack(side=tk.LEFT, padx=(6, 2))
         ctk.CTkSegmentedButton(
-            controls, values=["outline", "fill"], variable=self._icon_style_var, command=self._refresh_icon_grid
+            controls,
+            values=["outline", "fill"],
+            variable=self._icon_style_var,
+            command=self._refresh_icon_grid,
         ).pack(side=tk.LEFT, padx=6)
 
-        ctk.CTkButton(controls, text="Refresh Grid", command=self._refresh_icon_grid, width=100).pack(
-            side=tk.RIGHT, padx=6, pady=6
-        )
+        ctk.CTkButton(
+            controls, text="Refresh Grid", command=self._refresh_icon_grid, width=100
+        ).pack(side=tk.RIGHT, padx=6, pady=6)
 
         self._icon_size_var.trace_add("write", lambda *_: self._on_icon_size_change())
 
@@ -1357,12 +1455,42 @@ class CtkMegaDemo(ctk.CTk):
         self._icon_refs.clear()
 
         icon_names = [
-            "house", "star", "heart", "gear", "camera", "play-circle", "search",
-            "bell", "bookmark", "calendar", "chat", "cloud", "envelope", "eye",
-            "flag", "folder", "lightning", "lock", "pencil", "person",
-            "shield", "trash", "trophy", "wifi", "arrow-right", "check-circle",
-            "exclamation-triangle", "info-circle", "x-circle", "download",
-            "upload", "file-earmark", "clipboard", "clock", "cpu", "diagram-3",
+            "house",
+            "star",
+            "heart",
+            "gear",
+            "camera",
+            "play-circle",
+            "search",
+            "bell",
+            "bookmark",
+            "calendar",
+            "chat",
+            "cloud",
+            "envelope",
+            "eye",
+            "flag",
+            "folder",
+            "lightning",
+            "lock",
+            "pencil",
+            "person",
+            "shield",
+            "trash",
+            "trophy",
+            "wifi",
+            "arrow-right",
+            "check-circle",
+            "exclamation-triangle",
+            "info-circle",
+            "x-circle",
+            "download",
+            "upload",
+            "file-earmark",
+            "clipboard",
+            "clock",
+            "cpu",
+            "diagram-3",
         ]
         size = self._icon_size_var.get()
         style = self._icon_style_var.get()
@@ -1374,11 +1502,21 @@ class CtkMegaDemo(ctk.CTk):
                 icon = BootstrapIcon(name, size=size, color="#DCE4EE", style=style)
                 frame = ctk.CTkFrame(self._icon_grid_frame, corner_radius=6)
                 frame.grid(row=row, column=col, padx=4, pady=4, sticky="nsew")
-                lbl = tk.Label(frame, image=icon.image, text=name, compound="top", bg="#2b2b2b", fg="#DCE4EE", font=("Helvetica", 9))
+                lbl = tk.Label(
+                    frame,
+                    image=icon.image,
+                    text=name,
+                    compound="top",
+                    bg="#2b2b2b",
+                    fg="#DCE4EE",
+                    font=("Helvetica", 9),
+                )
                 lbl.pack(padx=6, pady=6)
                 self._icon_refs.append(icon)
             except Exception:
-                placeholder = ctk.CTkLabel(self._icon_grid_frame, text=name, font=ctk.CTkFont(size=10))
+                placeholder = ctk.CTkLabel(
+                    self._icon_grid_frame, text=name, font=ctk.CTkFont(size=10)
+                )
                 placeholder.grid(row=row, column=col, padx=4, pady=4)
 
         for c in range(cols):
@@ -1391,11 +1529,15 @@ class CtkMegaDemo(ctk.CTk):
         panel.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
         ctk.CTkLabel(
-            panel, text="ThemedText + ScrolledText (ttk-text)", font=ctk.CTkFont(size=18, weight="bold")
+            panel,
+            text="ThemedText + ScrolledText (ttk-text)",
+            font=ctk.CTkFont(size=18, weight="bold"),
         ).pack(anchor="w", padx=12, pady=(12, 8))
 
         if ThemedText is None:
-            ctk.CTkLabel(panel, text="ThemedText unavailable (install ttk-text)").pack(anchor="w", padx=12, pady=8)
+            ctk.CTkLabel(panel, text="ThemedText unavailable (install ttk-text)").pack(
+                anchor="w", padx=12, pady=8
+            )
             return
 
         split = ctk.CTkFrame(panel)
@@ -1403,29 +1545,34 @@ class CtkMegaDemo(ctk.CTk):
 
         left = ctk.CTkFrame(split)
         left.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 6), pady=6)
-        ctk.CTkLabel(left, text="ThemedText (basic)", font=ctk.CTkFont(size=14, weight="bold")).pack(
-            anchor="w", padx=8, pady=(8, 4)
-        )
+        ctk.CTkLabel(
+            left, text="ThemedText (basic)", font=ctk.CTkFont(size=14, weight="bold")
+        ).pack(anchor="w", padx=8, pady=(8, 4))
         tk_host_left = tk.Frame(left, bg="#2b2b2b")
         tk_host_left.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 8))
 
         themed_text = ThemedText(tk_host_left, height=12, width=40)
         themed_text.pack(fill=tk.BOTH, expand=True, padx=4, pady=4)
-        themed_text.insert("1.0", "ThemedText: a ttk-themed Text widget.\n\n"
-                           "It auto-adapts to the current ttk theme\n"
-                           "and supports focus/hover/pressed states.\n\n"
-                           "Try typing here — standard Text API applies.")
+        themed_text.insert(
+            "1.0",
+            "ThemedText: a ttk-themed Text widget.\n\n"
+            "It auto-adapts to the current ttk theme\n"
+            "and supports focus/hover/pressed states.\n\n"
+            "Try typing here — standard Text API applies.",
+        )
 
         right = ctk.CTkFrame(split)
         right.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(6, 0), pady=6)
-        ctk.CTkLabel(right, text="ScrolledText (with scrollbars)", font=ctk.CTkFont(size=14, weight="bold")).pack(
-            anchor="w", padx=8, pady=(8, 4)
-        )
+        ctk.CTkLabel(
+            right, text="ScrolledText (with scrollbars)", font=ctk.CTkFont(size=14, weight="bold")
+        ).pack(anchor="w", padx=8, pady=(8, 4))
         tk_host_right = tk.Frame(right, bg="#2b2b2b")
         tk_host_right.pack(fill=tk.BOTH, expand=True, padx=8, pady=(0, 8))
 
         if TtkScrolledText is not None:
-            scrolled = TtkScrolledText(tk_host_right, vertical=True, horizontal=True, height=12, width=40)
+            scrolled = TtkScrolledText(
+                tk_host_right, vertical=True, horizontal=True, height=12, width=40
+            )
             scrolled.pack(fill=tk.BOTH, expand=True, padx=4, pady=4)
             long_text = "\n".join(
                 f"Line {i:03d}: ScrolledText wraps ThemedText with automatic scrollbars."
@@ -1453,7 +1600,9 @@ class CtkMegaDemo(ctk.CTk):
         ).pack(anchor="w", padx=12, pady=(12, 8))
 
         if tklive_live is None:
-            ctk.CTkLabel(panel, text="tklive unavailable (install tklive)").pack(anchor="w", padx=12, pady=8)
+            ctk.CTkLabel(panel, text="tklive unavailable (install tklive)").pack(
+                anchor="w", padx=12, pady=8
+            )
 
         info = ctk.CTkTextbox(panel, height=260)
         info.pack(fill=tk.BOTH, expand=True, padx=12, pady=(6, 12))
@@ -1476,7 +1625,13 @@ class CtkMegaDemo(ctk.CTk):
             "Usage in code:\n"
             "  from tklive import live\n"
             "  live(root, __file__)  # before mainloop()\n\n"
-            "Status: " + ("ENABLED — hot-reload is active" if tklive_live is not None else "DISABLED — tklive not installed") + "\n",
+            "Status: "
+            + (
+                "ENABLED — hot-reload is active"
+                if tklive_live is not None
+                else "DISABLED — tklive not installed"
+            )
+            + "\n",
         )
 
     def set_appearance(self, mode: str) -> None:
@@ -1516,11 +1671,15 @@ class CtkMegaDemo(ctk.CTk):
         top = ctk.CTkToplevel(self)
         top.title("CTkToplevel Demo")
         top.geometry("480x320")
-        ctk.CTkLabel(top, text="This is a CTkToplevel", font=ctk.CTkFont(size=18, weight="bold")).pack(
+        ctk.CTkLabel(
+            top, text="This is a CTkToplevel", font=ctk.CTkFont(size=18, weight="bold")
+        ).pack(
             padx=12,
             pady=(16, 8),
         )
-        ctk.CTkEntry(top, placeholder_text="Type here in top-level window").pack(fill=tk.X, padx=12, pady=6)
+        ctk.CTkEntry(top, placeholder_text="Type here in top-level window").pack(
+            fill=tk.X, padx=12, pady=6
+        )
         ctk.CTkTextbox(top, height=130).pack(fill=tk.BOTH, expand=True, padx=12, pady=6)
         ctk.CTkButton(top, text="Close", command=top.destroy).pack(padx=12, pady=(4, 12))
         self.set_status("Opened CTkToplevel")
@@ -1780,7 +1939,7 @@ class CtkMegaDemo(ctk.CTk):
 
         try:
             if grid_manager is not None:
-                with grid_manager(grid_host) as grid:
+                with grid_manager(grid_host):
                     grid_host.columnconfigure(0, weight=1)
                     grid_host.columnconfigure(1, weight=1)
                     tk.Label(grid_host, text="grid_manager", fg="#dce8ff", bg="#1f222d").grid(
@@ -1814,7 +1973,9 @@ class CtkMegaDemo(ctk.CTk):
         try:
             if pack_manager is not None:
                 with pack_manager(pack_host):
-                    tk.Label(pack_host, text="pack_manager context", fg="#cde9c8", bg="#262a39").pack(
+                    tk.Label(
+                        pack_host, text="pack_manager context", fg="#cde9c8", bg="#262a39"
+                    ).pack(
                         side=tk.LEFT,
                         padx=6,
                         pady=6,
@@ -1850,13 +2011,17 @@ class CtkMegaDemo(ctk.CTk):
                     ).pack(anchor="w", padx=10, pady=2)
             except Exception as exc:
                 warn_import("tkk.frame_vertical_scrollbar", exc)
-                tk.Label(top, text="tkinter-kit scrollbar demo failed", fg="#ffb3b3", bg="#1f222d").pack(
+                tk.Label(
+                    top, text="tkinter-kit scrollbar demo failed", fg="#ffb3b3", bg="#1f222d"
+                ).pack(
                     anchor="w",
                     padx=8,
                     pady=6,
                 )
         else:
-            tk.Label(top, text="tkinter-kit unavailable", fg="#ffb3b3", bg="#1f222d").pack(anchor="w", padx=8, pady=6)
+            tk.Label(top, text="tkinter-kit unavailable", fg="#ffb3b3", bg="#1f222d").pack(
+                anchor="w", padx=8, pady=6
+            )
 
         bottom = tk.Frame(master, bg="#272c3b")
         bottom.pack(fill=tk.BOTH, expand=True, padx=8, pady=(4, 8))
@@ -1872,26 +2037,50 @@ class CtkMegaDemo(ctk.CTk):
                     pady=6,
                 )
                 for item in ("Documents", "Images", "Music", "Videos", "Downloads"):
-                    tk.Label(desktop.files_frame, text=f"  {item}", fg="#c8d6e5", bg="#1c243a", anchor="w").pack(
+                    tk.Label(
+                        desktop.files_frame,
+                        text=f"  {item}",
+                        fg="#c8d6e5",
+                        bg="#1c243a",
+                        anchor="w",
+                    ).pack(
                         fill=tk.X,
                         padx=4,
                         pady=1,
                     )
-                tk.Label(desktop.details_frame, text="tkinter-page DesktopFrame Demo", fg="#e8ffe9", bg="#182e1d").pack(
+                tk.Label(
+                    desktop.details_frame,
+                    text="tkinter-page DesktopFrame Demo",
+                    fg="#e8ffe9",
+                    bg="#182e1d",
+                ).pack(
                     padx=10,
                     pady=8,
                 )
-                tk.Label(desktop.details_frame, text="Details panel content here", fg="#a0c8a0", bg="#182e1d").pack(
+                tk.Label(
+                    desktop.details_frame,
+                    text="Details panel content here",
+                    fg="#a0c8a0",
+                    bg="#182e1d",
+                ).pack(
                     padx=10,
                     pady=4,
                 )
                 tk.Label(
-                    desktop.attributes_frame, text="Attributes: size, date, type", fg="#c8c8e5", bg="#22264a"
+                    desktop.attributes_frame,
+                    text="Attributes: size, date, type",
+                    fg="#c8c8e5",
+                    bg="#22264a",
                 ).pack(
                     padx=8,
                     pady=6,
                 )
-                tk.Label(desktop.logs_frame, text="Log: DesktopFrame loaded OK", fg="#a0a0a0", bg="#1a1a2e").pack(
+                tk.Label(
+                    desktop.logs_frame,
+                    text="Log: DesktopFrame loaded OK",
+                    fg="#a0a0a0",
+                    bg="#1a1a2e",
+                ).pack(
                     padx=8,
                     pady=6,
                 )

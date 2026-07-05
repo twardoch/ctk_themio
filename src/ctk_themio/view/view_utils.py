@@ -1,10 +1,13 @@
 from customtkinter import CTk, CTkToplevel
-from ctk_themio.model.ctk_theme_builder import log_call
+
 import ctk_themio.utils.loggerutl as log
+from ctk_themio.model.ctk_theme_builder import log_call
 
 
 @log_call
-def position_child_widget(parent_widget: CTk, child_widget: CTkToplevel, y_offset=0.5, x_offset=0.45):
+def position_child_widget(
+    parent_widget: CTk, child_widget: CTkToplevel, y_offset=0.5, x_offset=0.45
+):
     """
     Centers a child CTkToplevel widget within its parent CTk or CTkToplevel widget.
 
@@ -24,8 +27,8 @@ def position_child_widget(parent_widget: CTk, child_widget: CTkToplevel, y_offse
         position_x = int((child_widget.winfo_screenwidth() - child_width) / 2)
         position_y = int((child_widget.winfo_screenheight() - child_height) / 2)
     else:
-        position_x = int(parent_width * x_offset + parent_widget.winfo_x() - .5 * child_width)
-        position_y = int(parent_height * y_offset + parent_widget.winfo_y() - .5 * child_height)
+        position_x = int(parent_width * x_offset + parent_widget.winfo_x() - 0.5 * child_width)
+        position_y = int(parent_height * y_offset + parent_widget.winfo_y() - 0.5 * child_height)
 
     child_width = child_widget.winfo_width()
     child_height = child_widget.winfo_height()
@@ -39,6 +42,7 @@ def position_child_widget(parent_widget: CTk, child_widget: CTkToplevel, y_offse
     child_widget.geometry(geometry)
     parent_widget.update_idletasks()
     child_widget.lift()
+
 
 @log_call
 def offset_widget(parent_widget: CTk, y_offset, x_offset):
@@ -54,10 +58,8 @@ def offset_widget(parent_widget: CTk, y_offset, x_offset):
     parent_width = parent_widget.winfo_width()
     parent_height = parent_widget.winfo_height()
 
-    position_x = int(parent_width * x_offset + parent_widget.winfo_x())
-    position_y = int(parent_height * y_offset + parent_widget.winfo_y())
-
-
+    int(parent_width * x_offset + parent_widget.winfo_x())
+    int(parent_height * y_offset + parent_widget.winfo_y())
 
 
 if __name__ == "__main__":
@@ -70,7 +72,6 @@ if __name__ == "__main__":
     # Add some content to the child window (optional)
     child_window.title("This child is centered!")
 
-    centre_child_widget(parent_window, child_window)
+    position_child_widget(parent_window, child_window)
 
     parent_window.mainloop()
-

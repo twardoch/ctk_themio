@@ -5,6 +5,9 @@ _private/
 *.swp
 *.swo
 
+# Agent/orchestration state
+.swarm/
+
 # Python version management
 .python-version
 .pyenv

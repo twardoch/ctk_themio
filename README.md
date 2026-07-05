@@ -1,5 +1,7 @@
 # ctk_themio
 
+<img src="docs/assets/icon.png" alt="ctk_themio" width="120" align="right">
+
 Visual theme editor for [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter). Design a theme, see it immediately on every widget type, save it as JSON.
 
 ## What CustomTkinter theming is
@@ -79,6 +81,25 @@ The application follows an MVC pattern:
 - **Utils** (`utils/cbtk_kit.py`): color manipulation — hex/RGB conversion, lightness adjustment, contrast checking
 
 User preferences are stored in a SQLite database (auto-initialized on first run) via `model/preferences.py`. This tracks last-used theme, appearance mode, window geometry, and saved color palettes.
+
+## Development
+
+```bash
+# Install with the dev group
+uv sync --group dev
+
+# Lint, type-check, test
+uvx ruff check src/ tests/
+uvx ruff format --check src/ tests/
+uvx mypy                       # headless modules
+uv run --group dev python -m pytest tests/
+```
+
+The test suite is headless — it exercises the colour maths, the SQLite
+preference store, path handling, and v4→v5 theme migration without opening a
+window, so it runs in CI on Linux (under `xvfb`) and macOS. The GUI layer under
+`view/` is dynamically typed against CustomTkinter and sits outside the
+type-checked set.
 
 ## Based on
 

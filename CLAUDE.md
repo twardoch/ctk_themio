@@ -29,6 +29,24 @@ uvx hatch build
 ./publish.sh
 ```
 
+## Tests & CI
+
+Tests live in `tests/` and are **headless** — they cover the colour maths
+(`utils/cbtk_kit.py`), the SQLite preference store (`model/preferences.py`),
+the path map (`paths.py`), and the v4→v5 migrator (`utils/ctk_theme_migrate.py`)
+without opening a window.
+
+```bash
+uv run --group dev python -m pytest tests/   # macOS: runs directly
+xvfb-run -a uv run --group dev python -m pytest tests/   # Linux: needs a display for Tk import
+uvx ruff check src/ tests/ && uvx ruff format --check src/ tests/
+uvx mypy                                      # headless modules only (see [tool.mypy].files)
+```
+
+CI (`.github/workflows/ci.yml`) runs lint + type-check + tests on Linux/macOS;
+`release.yml` builds and publishes to PyPI on a `v*` tag. Keep the GUI (`view/`,
+`demo/`) out of the mypy set — it is dynamically typed against CustomTkinter.
+
 ## Package Structure
 
 Standard `src/` layout with `hatch` build system and `hatch-vcs` for git-tag semver.

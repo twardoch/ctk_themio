@@ -1,37 +1,39 @@
-__title__ = 'CB CustomTkinter Toolkit'
-__author__ = 'Clive Bostock'
+__title__ = "CB CustomTkinter Toolkit"
+__author__ = "Clive Bostock"
 __version__ = "1.0.0"
-__license__ = 'MIT - see LICENSE.md'
+__license__ = "MIT - see LICENSE.md"
 
+import json
+import textwrap
 import tkinter as tk
+
 import customtkinter as ctk
 from customtkinter import ThemeManager
-from PIL import Image
-import textwrap
-import json
 from matplotlib.colors import is_color_like
+from PIL import Image
+
 import ctk_themio.utils.color_constants as color_constants
 
 # Constants
 # These aren't true sizes as per WEB design
-HEADING1 = ('Roboto', 26)
-HEADING2 = ('Roboto', 22)
-HEADING3 = ('Roboto', 20)
-HEADING4 = ('Roboto', 18)
-HEADING5 = ('Roboto', 16)
+HEADING1 = ("Roboto", 26)
+HEADING2 = ("Roboto", 22)
+HEADING3 = ("Roboto", 20)
+HEADING4 = ("Roboto", 18)
+HEADING5 = ("Roboto", 16)
 # HEADING_UL = 'Roboto 11 underline'
-REGULAR_TEXT = ('Roboto', 13)
+REGULAR_TEXT = ("Roboto", 13)
 
-SMALL_TEXT = ('Roboto', 8)
+SMALL_TEXT = ("Roboto", 8)
 TOOLTIP_DELAY = 1
 
 
 def hex2rgb(hex_color: str) -> tuple:
-    return tuple(int(hex_color.strip("#")[i:i + 2], 16) for i in (0, 2, 4))
+    return tuple(int(hex_color.strip("#")[i : i + 2], 16) for i in (0, 2, 4))
 
 
 def rgb2hex(rgb_color: tuple) -> str:
-    return "#{:02x}{:02x}{:02x}".format(round(rgb_color[0]), round(rgb_color[1]), round(rgb_color[2]))
+    return f"#{round(rgb_color[0]):02x}{round(rgb_color[1]):02x}{round(rgb_color[2]):02x}"
 
 
 def contrast_colour(color: str, differential: int = 20):
@@ -41,7 +43,7 @@ def contrast_colour(color: str, differential: int = 20):
     if color is None:
         # This occurs where we have a colour property set to "transparent", these render as white
         # so return a grey as a contrast.
-        return '#b0b0b0'
+        return "#b0b0b0"
     if not str(color).startswith("#"):
         convert_hex = color_constants.colors[color].hex_format()
         color_rgb = hex2rgb(convert_hex)
@@ -74,15 +76,18 @@ def shade_up(color: str, differential: int = 20, multiplier: int = 1):
     if color is None:
         # This occurs where we have a colour property set to "transparent", these render as white
         # so return a grey as a contrast.
-        return '#b0b0b0'
+        return "#b0b0b0"
     if not str(color).startswith("#"):
         convert_hex = color_constants.colors[color].hex_format()
         color_rgb = hex2rgb(convert_hex)
     else:
         color_rgb = hex2rgb(color)
 
-    if color_rgb[0] + compound_differential > 255 or color_rgb[1] + compound_differential > 255 \
-            or color_rgb[2] + compound_differential > 255:
+    if (
+        color_rgb[0] + compound_differential > 255
+        or color_rgb[1] + compound_differential > 255
+        or color_rgb[2] + compound_differential > 255
+    ):
         # Don't perturb the colour balance
         return color
 
@@ -101,15 +106,18 @@ def shade_down(color: str, differential: int = 20, multiplier: int = 1):
     if color is None:
         # This occurs where we have a colour property set to "transparent", these render as white
         # so return a grey as a contrast.
-        return '#b0b0b0'
+        return "#b0b0b0"
     if not str(color).startswith("#"):
         convert_hex = color_constants.colors[color].hex_format()
         color_rgb = hex2rgb(convert_hex)
     else:
         color_rgb = hex2rgb(color)
 
-    if color_rgb[0] - compound_differential < 0 or color_rgb[1] - compound_differential < 0 \
-            or color_rgb[2] - compound_differential < 0:
+    if (
+        color_rgb[0] - compound_differential < 0
+        or color_rgb[1] - compound_differential < 0
+        or color_rgb[2] - compound_differential < 0
+    ):
         # Don't perturb the colour balance
         return color
 
@@ -124,7 +132,7 @@ def get_color_from_name(widget_type: str, widget_property: str = "fg_color"):
     """Gets the colour code associated with the supplied widget property,
     as defined by the currently active CustomTkinter theme."""
     mode = ctk.get_appearance_mode()
-    if mode == 'Light':
+    if mode == "Light":
         mode_idx = 0
     else:
         mode_idx = 1
@@ -142,14 +150,14 @@ def geometry_offset(window_geometry, x_increment=0, y_increment=0):
     top_level.geometry(f"300x400{offset}")
     """
     if window_geometry is None or not window_geometry:
-        return '+0+0'
+        return "+0+0"
 
     # There are situations where Tk returns a '+-' within the geometry string.
-    if '-' in window_geometry.replace('+-', '+'):
+    if "-" in window_geometry.replace("+-", "+"):
         print("WARNING: cbtk_kit.geometry_offset(), does not support negative offsets!")
         return "+0+0"
 
-    geometry_components = window_geometry.replace('+-', '+').split('+')
+    geometry_components = window_geometry.replace("+-", "+").split("+")
     geometry_x = geometry_components[1]
     geometry_x = int(geometry_x) + x_increment
     geometry_y = geometry_components[2]
@@ -160,7 +168,7 @@ def geometry_offset(window_geometry, x_increment=0, y_increment=0):
 def str_mode_to_int(mode=None):
     """Returns the integer representing the CustomTkinter theme appearance mode, 0 for "Light", 1 for "Dark". If
     "Dark" or "Light" is not passed as a parameter, the current theme mode is detected and the return value is based
-    upon that. """
+    upon that."""
     if mode is not None:
         appearance_mode = mode
     else:
@@ -171,31 +179,31 @@ def str_mode_to_int(mode=None):
 
 
 def load_image(light_image, dark_image=None, image_size: tuple = (30, 30)):
-    """ load rectangular image with path relative to PATH """
+    """load rectangular image with path relative to PATH"""
 
     if dark_image is None:
         dark_image = light_image
 
-    return ctk.CTkImage(light_image=Image.open(light_image),
-                        dark_image=Image.open(dark_image),
-                        size=image_size)
+    return ctk.CTkImage(
+        light_image=Image.open(light_image), dark_image=Image.open(dark_image), size=image_size
+    )
     # return ImageTk.PhotoImage(Image.open(path).resize((image_size, image_size)))
 
 
 def theme_property_color(theme_file_path, widget_type: str, widget_property: str, mode: str):
     """Based on the pathname to the CustomTkinter theme's JSON file, we return the colour code, for the specified
-    CustomTkinter appearance mode, and widget property. """
+    CustomTkinter appearance mode, and widget property."""
     with open(theme_file_path) as json_file:
         theme_dict = json.load(json_file)
 
-    mode_idx = 0 if mode.lower() == 'light' else 1
+    mode_idx = 0 if mode.lower() == "light" else 1
     property_colour = theme_dict[widget_type][widget_property][mode_idx]
     return property_colour
 
 
 def theme_property(theme_file_path, widget_type: str, widget_property: str):
     """Based on the pathname to the CustomTkinter theme's JSON file, we return the property value, for the specified
-    CustomTkinter widget property. """
+    CustomTkinter widget property."""
     with open(theme_file_path) as json_file:
         theme_dict = json.load(json_file)
 
@@ -203,7 +211,7 @@ def theme_property(theme_file_path, widget_type: str, widget_property: str):
     return property_colour
 
 
-def theme_provenence_attribute(theme_file_path, attribute: str, value_on_missing: str = 'Unknown'):
+def theme_provenence_attribute(theme_file_path, attribute: str, value_on_missing: str = "Unknown"):
     """Based on the pathname to the CustomTkinter theme's JSON file, we return the requested provenance value
     associated with the supplied attribute."""
     with open(theme_file_path) as json_file:
@@ -223,22 +231,20 @@ def wrap_string(text_string: str, wrap_width=80):
     """
     wrapper = textwrap.TextWrapper(width=wrap_width)
     word_list = wrapper.wrap(text=text_string)
-    string = ''
+    string = ""
     for element in word_list:
-        string = string + element + '\n'
+        string = string + element + "\n"
     return string
 
 
 class CBtkMenu(tk.Menu):
-    widget_registry = []
+    widget_registry: list["CBtkMenu"] = []
 
-    def __init__(self,
-                 *args,
-                 **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         mode = ctk.get_appearance_mode()
-        if mode == 'Light':
+        if mode == "Light":
             mode = 0
         else:
             mode = 1
@@ -251,11 +257,13 @@ class CBtkMenu(tk.Menu):
         self._font_size = 11
         self._font_weight = platform_font["weight"]
 
-        self.configure(bg=fg_color,
-                       fg=text_color,
-                       activebackground=hover_color,
-                       activeforeground=text_color,
-                       font=(self._font_family, self._font_size, self._font_weight))
+        self.configure(
+            bg=fg_color,
+            fg=text_color,
+            activebackground=hover_color,
+            activeforeground=text_color,
+            font=(self._font_family, self._font_size, self._font_weight),
+        )
 
         CBtkMenu.widget_registry.append(self)
 
@@ -272,7 +280,7 @@ class CBtkMenu(tk.Menu):
     def update_appearance_mode(self):
         """Method called to scan through rendered widgets and update to a new appearance mode setting."""
         mode = ctk.get_appearance_mode()
-        if mode == 'Light':
+        if mode == "Light":
             mode = 0
         else:
             mode = 1
@@ -281,14 +289,14 @@ class CBtkMenu(tk.Menu):
         hover_color = ThemeManager.theme["DropdownMenu"]["hover_color"][mode]
         text_color = ThemeManager.theme["DropdownMenu"]["text_color"][mode]
 
-        self.configure(bg=fg_color,
-                       fg=text_color,
-                       activebackground=hover_color,
-                       activeforeground=text_color)
+        self.configure(
+            bg=fg_color, fg=text_color, activebackground=hover_color, activeforeground=text_color
+        )
 
 
 class InvalidParameterValue(Exception):
     """Unexpected parameter value passed to a function."""
+
     pass
 
 
@@ -300,20 +308,23 @@ def valid_colour(colour):
     return is_color_like(colour)
 
 
-class CBtkMessageBox(object):
+class CBtkMessageBox:
     """Message box class for CustomTkinter. Up to 4 buttons are rendered where their respective buttonN_text
     parameter has a value. An integer value us returned, dependant upon the respective button number, of the button
-    pressed. """
+    pressed."""
 
-    def __init__(self, title='CBtkMessageBox',
-                 message='',
-                 button_height=2,
-                 button1_text='OK',
-                 button2_text='',
-                 button3_text='',
-                 button4_text='',
-                 master=None,
-                 geometry=None):
+    def __init__(
+        self,
+        title="CBtkMessageBox",
+        message="",
+        button_height=2,
+        button1_text="OK",
+        button2_text="",
+        button3_text="",
+        button4_text="",
+        master=None,
+        geometry=None,
+    ):
         """
         :param title:
         :param message:
@@ -330,7 +341,7 @@ class CBtkMessageBox(object):
         self.button2_text = button2_text  # Button 2 (outputs '2')
         self.button3_text = button3_text  # Button 3 (outputs '3')
         self.button4_text = button4_text  # Button 4 (outputs '4')
-        self.choice = ''  # it will be the return of messagebox according to button press
+        self.choice = ""  # it will be the return of messagebox according to button press
 
         # Create TopLevel dialog for the messagebox
         self.root = ctk.CTkToplevel()
@@ -367,7 +378,7 @@ class CBtkMessageBox(object):
         # Setting Geometry
         if self.master:
             try:
-                master.attributes('-disabled', 1)
+                master.attributes("-disabled", 1)
             except AttributeError:
                 pass
             # Added for MacOS:
@@ -401,11 +412,13 @@ class CBtkMessageBox(object):
         pad_y = (10, 0)
 
         # Create a button, corresponding to button1_text
-        self.button1_text = ctk.CTkButton(self.frm_buttons,
-                                          text=self.button1_text,
-                                          command=self.click1,
-                                          width=button_width,
-                                          height=button_height)
+        self.button1_text = ctk.CTkButton(
+            self.frm_buttons,
+            text=self.button1_text,
+            command=self.click1,
+            width=button_width,
+            height=button_height,
+        )
         if button_count == 1:
             self.button1_text.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         else:
@@ -416,27 +429,33 @@ class CBtkMessageBox(object):
 
         # Create a button, corresponding to  button2_text
         if button2_text:
-            self.button2_text = ctk.CTkButton(self.frm_buttons,
-                                              text=self.button2_text,
-                                              command=self.click2,
-                                              width=button_width,
-                                              height=button_height)
+            self.button2_text = ctk.CTkButton(
+                self.frm_buttons,
+                text=self.button2_text,
+                command=self.click2,
+                width=button_width,
+                height=button_height,
+            )
             self.button2_text.grid(row=0, column=1, padx=pad_x, pady=pad_y)
         # Create a button, corresponding to  button3_text
         if button3_text:
-            self.button3_text = ctk.CTkButton(self.frm_buttons,
-                                              text=self.button3_text,
-                                              command=self.click3,
-                                              width=button_width,
-                                              height=button_height)
+            self.button3_text = ctk.CTkButton(
+                self.frm_buttons,
+                text=self.button3_text,
+                command=self.click3,
+                width=button_width,
+                height=button_height,
+            )
             self.button3_text.grid(row=0, column=2, padx=pad_x, pady=pad_y)
         # Create a button, corresponding to button4_text
         if button4_text:
-            self.button4_text = ctk.CTkButton(self.frm_buttons,
-                                              text=self.button4_text,
-                                              command=self.click4,
-                                              width=button_width,
-                                              height=button_height)
+            self.button4_text = ctk.CTkButton(
+                self.frm_buttons,
+                text=self.button4_text,
+                command=self.click4,
+                width=button_width,
+                height=button_height,
+            )
             self.button4_text.grid(row=0, column=3, padx=pad_x, pady=pad_y)
 
         # Make the message box visible
@@ -453,10 +472,10 @@ class CBtkMessageBox(object):
     # Function on Closing MessageBox
     def closed(self):
         self.root.destroy()  # Destroying Dialogue
-        self.choice = 'closed'  # Assigning Value
+        self.choice = "closed"  # Assigning Value
         if self.master:
             try:
-                self.master.attributes('-disabled', 0)
+                self.master.attributes("-disabled", 0)
             except AttributeError:
                 pass
             # Added for MacOS:
@@ -476,7 +495,7 @@ class CBtkMessageBox(object):
         self.choice = 1  # Assigning Value
         if self.master:
             try:
-                self.master.attributes('-disabled', 0)
+                self.master.attributes("-disabled", 0)
             except AttributeError:
                 pass
             # Added for MacOS:
@@ -496,7 +515,7 @@ class CBtkMessageBox(object):
         self.choice = 2  # Assigning Value
         if self.master:
             try:
-                self.master.attributes('-disabled', 0)
+                self.master.attributes("-disabled", 0)
             except AttributeError:
                 pass
             # Added for MacOS:
@@ -516,7 +535,7 @@ class CBtkMessageBox(object):
         self.choice = 3  # Assigning Value
         if self.master:
             try:
-                self.master.attributes('-disabled', 0)
+                self.master.attributes("-disabled", 0)
             except AttributeError:
                 pass
             # Added for MacOS:
@@ -536,7 +555,7 @@ class CBtkMessageBox(object):
         self.choice = 4  # Assigning Value
         if self.master:
             try:
-                self.master.attributes('-disabled', 0)
+                self.master.attributes("-disabled", 0)
             except AttributeError:
                 pass
             except tk.TclError:
@@ -553,7 +572,7 @@ def raise_tk_window(window_widget: tk.Toplevel):
     """Brings a window widget to the front (above other windows), but does not lock it there."""
 
     try:
-        window_widget.attributes('-topmost', 1)
+        window_widget.attributes("-topmost", 1)
     except AttributeError:
         pass
     # Added for MacOS:
@@ -561,7 +580,7 @@ def raise_tk_window(window_widget: tk.Toplevel):
         pass
 
     try:
-        window_widget.attributes('-topmost', 0)
+        window_widget.attributes("-topmost", 0)
     except AttributeError:
         pass
     # Added for MacOS:
@@ -600,12 +619,7 @@ class CBtkStatusBar(tk.Entry):
 
     """
 
-    def __init__(self,
-                 master,
-                 status_text_life=30,
-                 use_grid=True,
-                 fg_color=None,
-                 text_color=None):
+    def __init__(self, master, status_text_life=30, use_grid=True, fg_color=None, text_color=None):
         """
         :param master: Master widget, to which to attach the status bar.
         :param status_text_life: Defines, in seconds, the default longevity of messages displayed to the status bar.
@@ -616,9 +630,11 @@ class CBtkStatusBar(tk.Entry):
         super().__init__()
 
         if fg_color is None:
-            fg_color = self.get_color_from_name(widget_type='CTkFrame', widget_property='fg_color')
+            fg_color = self.get_color_from_name(widget_type="CTkFrame", widget_property="fg_color")
         if text_color is None:
-            text_color = self.get_color_from_name(widget_type='CTkLabel', widget_property='text_color')
+            text_color = self.get_color_from_name(
+                widget_type="CTkLabel", widget_property="text_color"
+            )
 
         self._message_id = None
         self._master = master
@@ -636,10 +652,12 @@ class CBtkStatusBar(tk.Entry):
         assert isinstance(self._status_text_life, int)
 
         # TODO: Uncomment relief when fixed in CTkLabel
-        self.widget = ctk.CTkLabel(master,
-                                   # relief=tk.SUNKEN,
-                                   text='',
-                                   anchor='w')
+        self.widget = ctk.CTkLabel(
+            master,
+            # relief=tk.SUNKEN,
+            text="",
+            anchor="w",
+        )
         if text_color is not None:
             self.widget.configure(text_color=text_color)
 
@@ -647,7 +665,9 @@ class CBtkStatusBar(tk.Entry):
             self.widget.configure(fg_color=fg_color)
 
         if use_grid:
-            self.widget.grid(row=grid_rows + 1, column=0, padx=0, pady=0, columnspan=grid_columns, sticky='ew')
+            self.widget.grid(
+                row=grid_rows + 1, column=0, padx=0, pady=0, columnspan=grid_columns, sticky="ew"
+            )
         else:
             self.widget.pack(fill="both", expand=0)
 
@@ -661,24 +681,23 @@ class CBtkStatusBar(tk.Entry):
             self._master.update_idletasks()
 
     def clear_status(self):
-        self.set_status_text(status_text=' ')
+        self.set_status_text(status_text=" ")
 
     @staticmethod
     def get_color_from_name(widget_type: str, widget_property="fg_color"):
         """Gets the colour code associated with the supplied widget property,
         as defined by the currently active CustomTkinter theme."""
         mode = ctk.get_appearance_mode()
-        if mode == 'Light':
+        if mode == "Light":
             mode = 0
         else:
             mode = 1
         colour = ThemeManager.theme[widget_type][widget_property][mode]
         return colour
 
-    def set_status_text(self, status_text: str,
-                        status_text_life=None):
+    def set_status_text(self, status_text: str, status_text_life=None):
         try:
-            self.widget.configure(text='  ' + status_text)
+            self.widget.configure(text="  " + status_text)
         except tk.TclError:
             return
         if status_text_life is not None:
@@ -705,15 +724,15 @@ class CBtkStatusBar(tk.Entry):
     def update_text_colour(self):
         """This method can be called if you flip the appearance mode between "Light" and "Dark". It interrogates the
         theme, setting the text to the colour defined by the appearance mode."""
-        text_color = self.get_color_from_name(widget_type='CTkLabel', widget_property='text_color')
+        text_color = self.get_color_from_name(widget_type="CTkLabel", widget_property="text_color")
         self.widget.configure(text_color=text_color)
 
     def cancel_message_timer(self):
         """If using the status message timeout feature, it is important to use the cancel_message_timer function,
         immediately prior to closing the window, where the Window is a CTkTopLevel object. This prevents a later
         reference and consequential exception, associated with an "after" method resource reference to an object which
-        is destroyed. """
-        if hasattr(self, '_message_id'):
+        is destroyed."""
+        if hasattr(self, "_message_id"):
             self.after_cancel(id=self._message_id)
 
     @staticmethod
@@ -724,7 +743,7 @@ class CBtkStatusBar(tk.Entry):
         self._status_text_life = status_text_life
 
 
-class CBtkToolTip(object):
+class CBtkToolTip:
     """
     Create a tooltip for a given widget. By default, CustomTkinter theme colours are used for the background and text.
     You must import ThemeManager from CustomTkinter for this widget.
@@ -738,22 +757,26 @@ class CBtkToolTip(object):
     https://stackoverflow.com/questions/3221956/how-do-i-display-tooltips-in-tkinter
     """
 
-    def __init__(self, widget, text='widget info', bg_color=None, fg_color=None):
+    def __init__(self, widget, text="widget info", bg_color=None, fg_color=None):
         """
         Class initialisation.
 
         :param widget: The widget object to assign the tooltip to.
         :param text: The text to be displayed as the tooltip.
         :param bg_color:  Hex colour code (#RRGGBB), defining the background colour of the tooltip.
-        :param fg_color:  Hex colour code (#RRGGBB), defining the text colour of the tooltip. 
+        :param fg_color:  Hex colour code (#RRGGBB), defining the text colour of the tooltip.
         """
         if bg_color is None:
-            self._bg_colour = self.get_color_from_name(widget_type='CTkToplevel', widget_property='fg_color')
+            self._bg_colour = self.get_color_from_name(
+                widget_type="CTkToplevel", widget_property="fg_color"
+            )
         else:
             self._bg_colour = bg_color
 
         if fg_color is None:
-            self._fg_color = self.get_color_from_name(widget_type='CTkLabel', widget_property='text_color')
+            self._fg_color = self.get_color_from_name(
+                widget_type="CTkLabel", widget_property="text_color"
+            )
         else:
             self._fg_color = fg_color
 
@@ -792,10 +815,17 @@ class CBtkToolTip(object):
         self._tw = tk.Toplevel(self._widget)
         # Leaves only the label and removes the app window
         self._tw.wm_overrideredirect(True)
-        self._tw.wm_geometry("+%d+%d" % (x, y))
-        label = tk.Label(self._tw, text=self._text, justify='left', fg=self._fg_color,
-                         bg=self._bg_colour, relief='solid', borderwidth=1,
-                         wraplength=self._wrap_length)
+        self._tw.wm_geometry(f"+{x:d}+{y:d}")
+        label = tk.Label(
+            self._tw,
+            text=self._text,
+            justify="left",
+            fg=self._fg_color,
+            bg=self._bg_colour,
+            relief="solid",
+            borderwidth=1,
+            wraplength=self._wrap_length,
+        )
         label.pack(ipadx=1)
 
     def hide_tooltip(self):
@@ -809,7 +839,7 @@ class CBtkToolTip(object):
         """Gets the colour code associated with the supplied widget property,
         as defined by the currently active CustomTkinter theme."""
         mode = ctk.get_appearance_mode()
-        if mode == 'Light':
+        if mode == "Light":
             mode = 0
         else:
             mode = 1

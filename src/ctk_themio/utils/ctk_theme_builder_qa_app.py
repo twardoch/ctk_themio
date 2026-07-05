@@ -1,16 +1,16 @@
-import os
-import sys
-# Add the parent directory to the Python path
-import tkinter as tk
-import customtkinter
 import argparse
-
-from pathlib import Path
-import ctk_themio.model.ctk_theme_builder as mod
-import ctk_themio.model.preferences as pref
+import os
 import threading
 import time
 
+# Add the parent directory to the Python path
+import tkinter as tk
+from pathlib import Path
+
+import customtkinter
+
+import ctk_themio.model.ctk_theme_builder as mod
+import ctk_themio.model.preferences as pref
 
 prog_path = os.path.realpath(__file__)
 app_home = Path(os.path.dirname(os.path.realpath(__file__)))
@@ -32,33 +32,45 @@ DB_FILE_PATH = mod.DB_FILE_PATH
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-        icon_photo = tk.PhotoImage(file=APP_IMAGES / 'bear-logo-colour-dark.png')
+        icon_photo = tk.PhotoImage(file=APP_IMAGES / "bear-logo-colour-dark.png")
         self.iconphoto(False, icon_photo)
         # Restore preferences
-        self.qa_geometry = pref.preference_setting(db_file_path=DB_FILE_PATH, scope='window_geometry',
-                                                   preference_name='qa_application')
-        if self.qa_geometry == 'NO_DATA_FOUND':
-            self.qa_geometry = '1100x580+0+0'
-            self.qa_geometry_dict = pref.new_preference_dict(scope='window_geometry',
-                                                             preference_name='qa_application',
-                                                             data_type='str', preference_value=self.qa_geometry)
-            pref.upsert_preference(db_file_path=DB_FILE_PATH, preference_row_dict=self.qa_geometry_dict)
+        self.qa_geometry = pref.preference_setting(
+            db_file_path=DB_FILE_PATH, scope="window_geometry", preference_name="qa_application"
+        )
+        if self.qa_geometry == "NO_DATA_FOUND":
+            self.qa_geometry = "1100x580+0+0"
+            self.qa_geometry_dict = pref.new_preference_dict(
+                scope="window_geometry",
+                preference_name="qa_application",
+                data_type="str",
+                preference_value=self.qa_geometry,
+            )
+            pref.upsert_preference(
+                db_file_path=DB_FILE_PATH, preference_row_dict=self.qa_geometry_dict
+            )
         self.geometry(self.qa_geometry)
 
-        self.qa_app_scaling = pref.preference_setting(db_file_path=DB_FILE_PATH, scope='scaling',
-                                                      preference_name='qa_application')
-        if self.qa_app_scaling == 'NO_DATA_FOUND':
-            self.qa_app_scaling = '100%'
-            self.qa_app_scaling_dict = pref.new_preference_dict(scope='scaling',
-                                                                preference_name='qa_application',
-                                                                data_type='str', preference_value=self.qa_app_scaling)
-            pref.upsert_preference(db_file_path=DB_FILE_PATH, preference_row_dict=self.qa_app_scaling_dict)
+        self.qa_app_scaling = pref.preference_setting(
+            db_file_path=DB_FILE_PATH, scope="scaling", preference_name="qa_application"
+        )
+        if self.qa_app_scaling == "NO_DATA_FOUND":
+            self.qa_app_scaling = "100%"
+            self.qa_app_scaling_dict = pref.new_preference_dict(
+                scope="scaling",
+                preference_name="qa_application",
+                data_type="str",
+                preference_value=self.qa_app_scaling,
+            )
+            pref.upsert_preference(
+                db_file_path=DB_FILE_PATH, preference_row_dict=self.qa_app_scaling_dict
+            )
 
         self.change_scaling_event(self.qa_app_scaling)
         # configure window
         self.title("CTk Theme Builder Quality Assurance")
         theme_dict = mod.json_dict(theme_json_file)
-        if 'provenance' in theme_dict:
+        if "provenance" in theme_dict:
             self.theme_name = theme_dict["provenance"]["theme name"]
         else:
             self.theme_name = os.path.basename(theme_json_file)
@@ -72,27 +84,42 @@ class App(customtkinter.CTk):
         self.sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
         self.sidebar_frame.grid(row=0, column=0, rowspan=4, sticky="nsew")
         self.sidebar_frame.grid_rowconfigure(4, weight=1)
-        self.logo_label = customtkinter.CTkLabel(self.sidebar_frame, text=self.theme_name,
-                                                 font=customtkinter.CTkFont(size=20, weight="bold"))
+        self.logo_label = customtkinter.CTkLabel(
+            self.sidebar_frame,
+            text=self.theme_name,
+            font=customtkinter.CTkFont(size=20, weight="bold"),
+        )
         self.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))
-        self.sidebar_button_1 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
+        self.sidebar_button_1 = customtkinter.CTkButton(
+            self.sidebar_frame, command=self.sidebar_button_event
+        )
         self.sidebar_button_1.grid(row=1, column=0, padx=20, pady=10)
-        self.sidebar_button_2 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
+        self.sidebar_button_2 = customtkinter.CTkButton(
+            self.sidebar_frame, command=self.sidebar_button_event
+        )
         self.sidebar_button_2.grid(row=2, column=0, padx=20, pady=10)
-        self.sidebar_button_3 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
+        self.sidebar_button_3 = customtkinter.CTkButton(
+            self.sidebar_frame, command=self.sidebar_button_event
+        )
         self.sidebar_button_3.grid(row=3, column=0, padx=20, pady=10)
-        self.appearance_mode_label = customtkinter.CTkLabel(self.sidebar_frame, text="Appearance Mode:", anchor="w")
+        self.appearance_mode_label = customtkinter.CTkLabel(
+            self.sidebar_frame, text="Appearance Mode:", anchor="w"
+        )
         self.appearance_mode_label.grid(row=5, column=0, padx=20, pady=(10, 0))
-        self.appearance_mode_optionemenu = customtkinter.CTkOptionMenu(self.sidebar_frame,
-                                                                       values=["Light", "Dark", "System"],
-                                                                       command=self.change_appearance_mode_event)
+        self.appearance_mode_optionemenu = customtkinter.CTkOptionMenu(
+            self.sidebar_frame,
+            values=["Light", "Dark", "System"],
+            command=self.change_appearance_mode_event,
+        )
         self.appearance_mode_optionemenu.grid(row=6, column=0, padx=20, pady=(10, 10))
 
         # create main entry and button
         self.entry = customtkinter.CTkEntry(self, placeholder_text="CTkEntry")
         self.entry.grid(row=3, column=1, columnspan=2, padx=(20, 0), pady=(20, 20), sticky="nsew")
 
-        self.main_button_1 = customtkinter.CTkButton(master=self, text='Close', border_width=2, command=self.close_app)
+        self.main_button_1 = customtkinter.CTkButton(
+            master=self, text="Close", border_width=2, command=self.close_app
+        )
         self.main_button_1.grid(row=3, column=3, padx=(20, 20), pady=(20, 20), sticky="nsew")
 
         # create textbox
@@ -105,40 +132,58 @@ class App(customtkinter.CTk):
         self.tabview.add("CTkTabview")
         self.tabview.add("Tab 2")
         self.tabview.add("Tab 3")
-        self.tabview.tab("CTkTabview").grid_columnconfigure(0, weight=1)  # configure grid of individual tabs
+        self.tabview.tab("CTkTabview").grid_columnconfigure(
+            0, weight=1
+        )  # configure grid of individual tabs
         self.tabview.tab("Tab 2").grid_columnconfigure(0, weight=1)
 
-        self.optionmenu_1 = customtkinter.CTkOptionMenu(self.tabview.tab("CTkTabview"), dynamic_resizing=False,
-                                                        values=["Value 1", "Value 2", "Value Long Long Long"])
+        self.optionmenu_1 = customtkinter.CTkOptionMenu(
+            self.tabview.tab("CTkTabview"),
+            dynamic_resizing=False,
+            values=["Value 1", "Value 2", "Value Long Long Long"],
+        )
         self.optionmenu_1.grid(row=0, column=0, padx=20, pady=(20, 10))
-        self.combobox_1 = customtkinter.CTkComboBox(self.tabview.tab("CTkTabview"),
-                                                    values=["Value 1", "Value 2", "Value Long....."])
+        self.combobox_1 = customtkinter.CTkComboBox(
+            self.tabview.tab("CTkTabview"), values=["Value 1", "Value 2", "Value Long....."]
+        )
         self.combobox_1.grid(row=1, column=0, padx=20, pady=(10, 10))
-        self.string_input_button = customtkinter.CTkButton(self.tabview.tab("CTkTabview"), text="Open CTkInputDialog",
-                                                           command=self.open_input_dialog_event)
+        self.string_input_button = customtkinter.CTkButton(
+            self.tabview.tab("CTkTabview"),
+            text="Open CTkInputDialog",
+            command=self.open_input_dialog_event,
+        )
         self.string_input_button.grid(row=2, column=0, padx=20, pady=(10, 10))
-        self.label_tab_2 = customtkinter.CTkLabel(self.tabview.tab("Tab 2"), text="CTkLabel on Tab 2")
+        self.label_tab_2 = customtkinter.CTkLabel(
+            self.tabview.tab("Tab 2"), text="CTkLabel on Tab 2"
+        )
         self.label_tab_2.grid(row=0, column=0, padx=20, pady=20)
 
         # create radiobutton frame
         self.radiobutton_frame = customtkinter.CTkFrame(self)
         self.radiobutton_frame.grid(row=0, column=3, padx=(20, 20), pady=(20, 0), sticky="nsew")
         self.radio_var = tk.IntVar(value=0)
-        self.label_radio_group = customtkinter.CTkLabel(master=self.radiobutton_frame, text="CTkRadioButton Group:")
+        self.label_radio_group = customtkinter.CTkLabel(
+            master=self.radiobutton_frame, text="CTkRadioButton Group:"
+        )
         self.label_radio_group.grid(row=0, column=2, columnspan=1, padx=10, pady=10, sticky="")
-        self.radio_button_1 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var,
-                                                           value=0)
+        self.radio_button_1 = customtkinter.CTkRadioButton(
+            master=self.radiobutton_frame, variable=self.radio_var, value=0
+        )
         self.radio_button_1.grid(row=1, column=2, pady=10, padx=20, sticky="n")
-        self.radio_button_2 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var,
-                                                           value=1)
+        self.radio_button_2 = customtkinter.CTkRadioButton(
+            master=self.radiobutton_frame, variable=self.radio_var, value=1
+        )
         self.radio_button_2.grid(row=2, column=2, pady=10, padx=20, sticky="n")
-        self.radio_button_3 = customtkinter.CTkRadioButton(master=self.radiobutton_frame, variable=self.radio_var,
-                                                           value=2)
+        self.radio_button_3 = customtkinter.CTkRadioButton(
+            master=self.radiobutton_frame, variable=self.radio_var, value=2
+        )
         self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
 
         # create slider and progressbar frame
         self.slider_progressbar_frame = customtkinter.CTkFrame(self, fg_color="transparent")
-        self.slider_progressbar_frame.grid(row=1, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
+        self.slider_progressbar_frame.grid(
+            row=1, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew"
+        )
         self.slider_progressbar_frame.grid_columnconfigure(0, weight=1)
         self.slider_progressbar_frame.grid_rowconfigure(4, weight=1)
         self.seg_button_1 = customtkinter.CTkSegmentedButton(self.slider_progressbar_frame)
@@ -147,15 +192,25 @@ class App(customtkinter.CTk):
         self.progressbar_1.grid(row=1, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
         self.progressbar_2 = customtkinter.CTkProgressBar(self.slider_progressbar_frame)
         self.progressbar_2.grid(row=2, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
-        self.slider_1 = customtkinter.CTkSlider(self.slider_progressbar_frame, from_=0, to=1, number_of_steps=4)
+        self.slider_1 = customtkinter.CTkSlider(
+            self.slider_progressbar_frame, from_=0, to=1, number_of_steps=4
+        )
         self.slider_1.grid(row=3, column=0, padx=(20, 10), pady=(10, 10), sticky="ew")
-        self.slider_2 = customtkinter.CTkSlider(self.slider_progressbar_frame, orientation="vertical")
+        self.slider_2 = customtkinter.CTkSlider(
+            self.slider_progressbar_frame, orientation="vertical"
+        )
         self.slider_2.grid(row=0, column=1, rowspan=5, padx=(10, 10), pady=(10, 10), sticky="ns")
-        self.progressbar_3 = customtkinter.CTkProgressBar(self.slider_progressbar_frame, orientation="vertical")
-        self.progressbar_3.grid(row=0, column=2, rowspan=5, padx=(10, 20), pady=(10, 10), sticky="ns")
+        self.progressbar_3 = customtkinter.CTkProgressBar(
+            self.slider_progressbar_frame, orientation="vertical"
+        )
+        self.progressbar_3.grid(
+            row=0, column=2, rowspan=5, padx=(10, 20), pady=(10, 10), sticky="ns"
+        )
 
         # create scrollable frame
-        self.scrollable_frame = customtkinter.CTkScrollableFrame(self, label_text="CTkScrollableFrame")
+        self.scrollable_frame = customtkinter.CTkScrollableFrame(
+            self, label_text="CTkScrollableFrame"
+        )
         self.scrollable_frame.grid(row=1, column=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
         self.scrollable_frame.grid_columnconfigure(0, weight=1)
         self.scrollable_frame_switches = []
@@ -189,8 +244,12 @@ class App(customtkinter.CTk):
         self.slider_2.configure(command=self.progressbar_3.set)
         self.progressbar_1.configure(mode="indeterminnate")
         self.progressbar_1.start()
-        self.textbox.insert("0.0",
-                            "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
+        self.textbox.insert(
+            "0.0",
+            "CTkTextbox\n\n"
+            + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n"
+            * 20,
+        )
         self.seg_button_1.configure(values=["CTkSegmentedButton", "Value 2", "Value 3"])
         self.seg_button_1.set("Value 2")
         self.protocol("WM_DELETE_WINDOW", self.close_app)
@@ -202,7 +261,7 @@ class App(customtkinter.CTk):
         self.after(100, self.check_for_running)
         self.start_requested_close_listener()
 
-        self.bind('<Escape>', self.close_app)
+        self.bind("<Escape>", self.close_app)
 
     def check_for_running(self):
         if not self.keep_running:
@@ -212,8 +271,7 @@ class App(customtkinter.CTk):
 
     def start_requested_close_listener(self):
         """Listener, which checks to see if a close request file has been created."""
-        client_thread = threading.Thread(target=self.listen_for_close,
-                                         daemon=True)
+        client_thread = threading.Thread(target=self.listen_for_close, daemon=True)
         client_thread.start()
 
     def open_input_dialog_event(self):
@@ -241,9 +299,9 @@ class App(customtkinter.CTk):
 
     def save_app_geometry(self):
         """Save the control panel geometry to the repo, for the next time the program is launched."""
-        geometry_row = pref.preference_row(db_file_path=DB_FILE_PATH,
-                                           scope='window_geometry',
-                                           preference_name='qa_application')
+        geometry_row = pref.preference_row(
+            db_file_path=DB_FILE_PATH, scope="window_geometry", preference_name="qa_application"
+        )
         qa_geometry = self.geometry()
         geometry_row["preference_value"] = qa_geometry
         pref.upsert_preference(db_file_path=DB_FILE_PATH, preference_row_dict=geometry_row)
@@ -255,13 +313,24 @@ class App(customtkinter.CTk):
 
 ap = argparse.ArgumentParser(description=f"""{PROG}: CTk Theme Builder test app.""")
 
-ap.add_argument("-a", "--appearance_mode", required=False, action="store",
-                help=f'Specifies the location of the theme file to use.',
-                dest='appearance_mode', default='Light')
+ap.add_argument(
+    "-a",
+    "--appearance_mode",
+    required=False,
+    action="store",
+    help="Specifies the location of the theme file to use.",
+    dest="appearance_mode",
+    default="Light",
+)
 
-ap.add_argument("-t", "--theme-json-file", required=True, action="store",
-                help=f'Specifies the location of the theme file to use.',
-                dest='theme_json_file')
+ap.add_argument(
+    "-t",
+    "--theme-json-file",
+    required=True,
+    action="store",
+    help="Specifies the location of the theme file to use.",
+    dest="theme_json_file",
+)
 
 args_list = vars(ap.parse_args())
 

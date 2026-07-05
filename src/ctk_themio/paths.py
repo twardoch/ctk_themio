@@ -2,7 +2,7 @@
 """
 Centralized path definitions for CTk Theme Builder.
 
-This module maps exactly where files live. It separates read-only assets 
+This module maps exactly where files live. It separates read-only assets
 bundled with the package from user-writable data like databases and logs.
 
 - Bundled Assets (Read-Only): Shipped with the python package. Modifying these breaks the app.
@@ -58,7 +58,7 @@ for _d in (USER_DATA_DIR, USER_LOG_DIR, USER_CACHE_DIR, PALETTES_DIR, LOG_DIR, T
 # ---------------------------------------------------------------------------
 # First-run setup: seed user themes
 # ---------------------------------------------------------------------------
-# If the user's theme directory doesn't exist yet, populate it with the 
+# If the user's theme directory doesn't exist yet, populate it with the
 # default examples shipped with the package.
 _user_themes_dir_default = USER_DATA_DIR / "user_themes"
 if not _user_themes_dir_default.exists() and BUNDLED_USER_THEMES_DIR.exists():

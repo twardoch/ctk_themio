@@ -1,26 +1,29 @@
 """
-Preferences Database Manager.n
-n
-Handles all CRUD operations for the SQLite database that stores user n
-preferences, color palettes, and application state. Automatically initializes n
-the database on the first run if it does not exist.n
+Preferences Database Manager.
+
+Handles all CRUD operations for the SQLite database that stores user
+preferences, color palettes, and application state. Automatically initializes
+the database on the first run if it does not exist.
 """
 
-from pathlib import Path
-import customtkinter as ctk
-import sqlite3
 import json
 import os
+import sqlite3
+from pathlib import Path
+from typing import Any
 
-
+import customtkinter as ctk
 
 # Constants
-from ctk_themio.paths import ASSETS_DIR, CONFIG_DIR, APP_DATA_DIR, DB_FILE_PATH, LOG_DIR, USER_DATA_DIR
+from ctk_themio.paths import (
+    ASSETS_DIR,
+    DB_FILE_PATH,
+    USER_DATA_DIR,
+)
 
-CTK_SITE_PACKAGES = Path(ctk.__file__)
-CTK_SITE_PACKAGES = os.path.dirname(CTK_SITE_PACKAGES)
-CTK_ASSETS = CTK_SITE_PACKAGES / Path('assets')
-CTK_THEMES = CTK_ASSETS / 'themes'
+CTK_SITE_PACKAGES = Path(ctk.__file__).parent
+CTK_ASSETS = CTK_SITE_PACKAGES / Path("assets")
+CTK_THEMES = CTK_ASSETS / "themes"
 
 db_file_found = None
 
@@ -59,8 +62,10 @@ def init_db(db_file_path: Path):
        record_number            integer primary key,
        app_version text,
        previous_app_version     text)""")
-    cur.execute("INSERT OR IGNORE INTO application_control (record_number, app_version, previous_app_version) "
-                "VALUES (1, '3.1.0', '3.1.0')")
+    cur.execute(
+        "INSERT OR IGNORE INTO application_control (record_number, app_version, previous_app_version) "
+        "VALUES (1, '3.1.0', '3.1.0')"
+    )
 
     cur.execute("""CREATE TABLE IF NOT EXISTS
      colour_palette_entries (
@@ -79,14 +84,18 @@ def init_db(db_file_path: Path):
     db_conn.commit()
 
     # Apply seed data from repo_updates.json
-    updates_file = ASSETS_DIR / 'config' / 'repo_updates.json'
+    updates_file = ASSETS_DIR / "config" / "repo_updates.json"
     if updates_file.exists():
         with open(updates_file) as f:
             updates = json.load(f)
         for sql_id in updates:
             sql_statement = updates[sql_id]["sql_statement"]
-            sql_statement = sql_statement.replace('%os_user_name%', os.environ.get('USER', os.environ.get('USERNAME', 'user')))
-            sql_statement = sql_statement.replace('%user_themes_location%', str(USER_DATA_DIR / 'user_themes'))
+            sql_statement = sql_statement.replace(
+                "%os_user_name%", os.environ.get("USER", os.environ.get("USERNAME", "user"))
+            )
+            sql_statement = sql_statement.replace(
+                "%user_themes_location%", str(USER_DATA_DIR / "user_themes")
+            )
             try:
                 cur.execute(sql_statement)
             except (sqlite3.OperationalError, sqlite3.IntegrityError):
@@ -116,15 +125,15 @@ def delete_preference(db_file_path: Path, scope: str, preference_name):
     :param preference_name: Preference name."""
 
     if not db_file_exists(db_file_path=db_file_path):
-        print(f'Unable to locate database file located at {db_file_path}')
+        print(f"Unable to locate database file located at {db_file_path}")
         raise FileNotFoundError
     db_conn = sqlite3.connect(db_file_path)
     cur = db_conn.cursor()
 
-    cur.execute("delete "
-                "from preferences "
-                "where scope = :scope "
-                "and preference_name = :preference_name;", {"scope": scope, "preference_name": preference_name})
+    cur.execute(
+        "delete from preferences where scope = :scope and preference_name = :preference_name;",
+        {"scope": scope, "preference_name": preference_name},
+    )
     db_conn.commit()
     db_conn.close()
 
@@ -137,21 +146,23 @@ def preferences_dict_list(db_file_path: Path):
     :return list: List of preferences dictionaries.
     """
     if not db_file_exists(db_file_path=db_file_path):
-        print(f'Unable to locate database file located at {db_file_path}')
+        print(f"Unable to locate database file located at {db_file_path}")
         raise FileNotFoundError
 
     db_conn = sqlite3.connect(db_file_path)
     db_conn.row_factory = sqlite_dict_factory
     cur = db_conn.cursor()
-    cur.execute("select scope, "
-                "preference_name, "
-                "preference_value, "
-                "preference_label, "
-                "preference_attr1, "
-                "preference_attr2, "
-                "preference_attr3 "
-                "from preferences "
-                "order by scope, preference_name;")
+    cur.execute(
+        "select scope, "
+        "preference_name, "
+        "preference_value, "
+        "preference_label, "
+        "preference_attr1, "
+        "preference_attr2, "
+        "preference_attr3 "
+        "from preferences "
+        "order by scope, preference_name;"
+    )
     preferences = cur.fetchall()
     db_conn.close()
     return preferences
@@ -166,21 +177,24 @@ def preferences_scope_list(db_file_path: Path, scope: str):
     :return: List - each entry is in turn a list, representing a returned row."""
 
     if not db_file_exists(db_file_path=db_file_path):
-        print(f'Unable to locate database file located at {db_file_path}')
+        print(f"Unable to locate database file located at {db_file_path}")
         raise FileNotFoundError
 
     db_conn = sqlite3.connect(db_file_path)
     cur = db_conn.cursor()
-    cur.execute("select preference_name, "
-                "preference_value, "
-                "preference_attr1, "
-                "preference_attr2, "
-                "preference_attr3, "
-                "preference_attr4, "
-                "preference_attr5 "
-                "from preferences "
-                "where scope = :scope "
-                "order by preference_name;", {"scope": scope})
+    cur.execute(
+        "select preference_name, "
+        "preference_value, "
+        "preference_attr1, "
+        "preference_attr2, "
+        "preference_attr3, "
+        "preference_attr4, "
+        "preference_attr5 "
+        "from preferences "
+        "where scope = :scope "
+        "order by preference_name;",
+        {"scope": scope},
+    )
     preferences = cur.fetchall()
     db_conn.close()
     list_of_preferences = []
@@ -193,8 +207,12 @@ def preferences_scope_list(db_file_path: Path, scope: str):
     return list_of_preferences
 
 
-def preference_setting(scope: str, preference_name, db_file_path: Path = DB_FILE_PATH,
-                       default: [str, int, Path] = 'NO_DATA_FOUND') -> any:
+def preference_setting(
+    scope: str,
+    preference_name,
+    db_file_path: Path = DB_FILE_PATH,
+    default: str | int | Path = "NO_DATA_FOUND",
+) -> Any:
     """The preference_setting function accepts a preference scope and preference name, and returns the associated
     preference value.
     :param default:
@@ -210,10 +228,13 @@ def preference_setting(scope: str, preference_name, db_file_path: Path = DB_FILE
     db_conn = sqlite3.connect(db_file_path)
     cur = db_conn.cursor()
 
-    cur.execute("select preference_value, data_type "
-                "from preferences "
-                "where scope = :scope "
-                "and preference_name = :preference_name;", {"scope": scope, "preference_name": preference_name})
+    cur.execute(
+        "select preference_value, data_type "
+        "from preferences "
+        "where scope = :scope "
+        "and preference_name = :preference_name;",
+        {"scope": scope, "preference_name": preference_name},
+    )
     row = cur.fetchone()
     if row is not None:
         preference_value, data_type = row
@@ -222,13 +243,13 @@ def preference_setting(scope: str, preference_name, db_file_path: Path = DB_FILE
         preference_value = default
         return preference_value
     db_conn.close()
-    if data_type == 'str':
+    if data_type == "str":
         return str(preference_value)
-    elif data_type == 'int':
+    elif data_type == "int":
         return int(preference_value)
-    elif data_type == 'Path':
+    elif data_type == "Path":
         return Path(preference_value)
-    elif data_type == 'float':
+    elif data_type == "float":
         return float(preference_value)
     else:
         return str(preference_value)
@@ -236,16 +257,19 @@ def preference_setting(scope: str, preference_name, db_file_path: Path = DB_FILE
 
 def scope_preferences(db_file_path: Path, scope: str):
     if not db_file_exists(db_file_path=db_file_path):
-        print(f'Unable to locate database file located at {db_file_path}')
+        print(f"Unable to locate database file located at {db_file_path}")
         raise FileNotFoundError
 
     db_conn = sqlite3.connect(db_file_path)
     db_conn.row_factory = sqlite_dict_factory
     cur = db_conn.cursor()
 
-    cur.execute("select scope, preference_name, preference_value, preference_attr1, preference_attr2, preference_attr3 "
-                "from preferences "
-                "where scope = :scope;", {"scope": scope})
+    cur.execute(
+        "select scope, preference_name, preference_value, preference_attr1, preference_attr2, preference_attr3 "
+        "from preferences "
+        "where scope = :scope;",
+        {"scope": scope},
+    )
     scope_rows = cur.fetchall()
     db_conn.close()
     return scope_rows
@@ -257,17 +281,20 @@ def preference_row(db_file_path: Path, scope: str, preference_name) -> dict:
     :return (dict): The preference row presented as a dictionary ("column name": value pairs)"""
 
     if not db_file_exists(db_file_path=db_file_path):
-        print(f'Unable to locate database file located at {db_file_path}')
+        print(f"Unable to locate database file located at {db_file_path}")
         raise FileNotFoundError
 
     db_conn = sqlite3.connect(db_file_path)
     db_conn.row_factory = sqlite_dict_factory
     cur = db_conn.cursor()
 
-    cur.execute("select scope, preference_name, preference_value, preference_attr1, preference_attr2, preference_attr3 "
-                "from preferences "
-                "where scope = :scope "
-                "and preference_name = :preference_name;", {"scope": scope, "preference_name": preference_name})
+    cur.execute(
+        "select scope, preference_name, preference_value, preference_attr1, preference_attr2, preference_attr3 "
+        "from preferences "
+        "where scope = :scope "
+        "and preference_name = :preference_name;",
+        {"scope": scope, "preference_name": preference_name},
+    )
     preference_row = cur.fetchone()
     db_conn.close()
     return preference_row
@@ -276,9 +303,10 @@ def preference_row(db_file_path: Path, scope: str, preference_name) -> dict:
 def user_themes_list():
     """This method generates a list of theme names, based on the json files found in the user's themes folder
     (i.e. self.theme_json_dir). These are basically the theme file names, with the .json extension stripped out."""
-    user_themes_dir = preference_setting(db_file_path=DB_FILE_PATH, scope='user_preference',
-                                         preference_name='theme_json_dir')
-    json_files = list(user_themes_dir.glob('*.json'))
+    user_themes_dir = preference_setting(
+        db_file_path=DB_FILE_PATH, scope="user_preference", preference_name="theme_json_dir"
+    )
+    json_files = list(user_themes_dir.glob("*.json"))
     theme_names = []
     for file in json_files:
         file = os.path.basename(file)
@@ -286,7 +314,6 @@ def user_themes_list():
         theme_names.append(theme_name)
     theme_names.sort()
     return theme_names
-
 
 
 def sqlite_dict_factory(cursor, row):
@@ -304,16 +331,18 @@ def sqlite_dict_factory(cursor, row):
 
 def update_preference_value(db_file_path: Path, scope: str, preference_name, preference_value):
     if not db_file_exists(db_file_path=db_file_path):
-        print(f'Unable to locate database file located at {db_file_path}')
+        print(f"Unable to locate database file located at {db_file_path}")
         raise FileNotFoundError
 
     db_conn = sqlite3.connect(db_file_path)
     cur = db_conn.cursor()
 
-    cur.execute("update preferences  "
-                "set preference_value = :preference_value "
-                "where scope = :scope and preference_name = :preference_name;",
-                {"scope": scope, "preference_name": preference_name, "preference_value": preference_value})
+    cur.execute(
+        "update preferences  "
+        "set preference_value = :preference_value "
+        "where scope = :scope and preference_name = :preference_name;",
+        {"scope": scope, "preference_name": preference_name, "preference_value": preference_value},
+    )
     rowcount = cur.rowcount
 
     db_conn.commit()
@@ -321,8 +350,7 @@ def update_preference_value(db_file_path: Path, scope: str, preference_name, pre
     return rowcount
 
 
-def upsert_preference(db_file_path: Path,
-                      preference_row_dict: dict):
+def upsert_preference(db_file_path: Path, preference_row_dict: dict):
     """The upsert_preference function operates as an UPSERT mechanism. Inserting where the preference does not exist,
     but updating where it already exists. We use a dictionary as our row data currency, this helps us preserve column
     values, where we don't modify them if cont required in some contexts.
@@ -330,55 +358,67 @@ def upsert_preference(db_file_path: Path,
     :param preference_row_dict:
     """
     if not db_file_exists(db_file_path=db_file_path):
-        print(f'Unable to locate database file located at {db_file_path}')
+        print(f"Unable to locate database file located at {db_file_path}")
         raise FileNotFoundError
 
     db_conn = sqlite3.connect(db_file_path)
     cur = db_conn.cursor()
 
     # Check to see if the preference exists.
-    curr_preference = preference_setting(db_file_path=db_file_path,
-                                         scope=preference_row_dict['scope'],
-                                         preference_name=preference_row_dict['preference_name'])
+    curr_preference = preference_setting(
+        db_file_path=db_file_path,
+        scope=preference_row_dict["scope"],
+        preference_name=preference_row_dict["preference_name"],
+    )
 
-    if curr_preference == 'NO_DATA_FOUND':
+    if curr_preference == "NO_DATA_FOUND":
         # The preference does not exist
-        cur.execute("insert  "
-                    "into preferences (scope, preference_name, data_type, preference_value, "
-                    "preference_attr1, preference_attr2, preference_attr3) "
-                    "values "
-                    "(:scope, :preference_name, :data_type, :preference_value, "
-                    ":preference_attr1, :preference_attr2, :preference_attr3);",
-                    preference_row_dict)
+        cur.execute(
+            "insert  "
+            "into preferences (scope, preference_name, data_type, preference_value, "
+            "preference_attr1, preference_attr2, preference_attr3) "
+            "values "
+            "(:scope, :preference_name, :data_type, :preference_value, "
+            ":preference_attr1, :preference_attr2, :preference_attr3);",
+            preference_row_dict,
+        )
     else:
-        cur.execute("update preferences  "
-                    "set "
-                    "    preference_value = :preference_value, "
-                    "    preference_attr1 = :preference_attr1, "
-                    "    preference_attr2 = :preference_attr2, "
-                    "    preference_attr3 = :preference_attr3 "
-                    "where scope = :scope and preference_name = :preference_name;",
-                    preference_row_dict)
+        cur.execute(
+            "update preferences  "
+            "set "
+            "    preference_value = :preference_value, "
+            "    preference_attr1 = :preference_attr1, "
+            "    preference_attr2 = :preference_attr2, "
+            "    preference_attr3 = :preference_attr3 "
+            "where scope = :scope and preference_name = :preference_name;",
+            preference_row_dict,
+        )
 
     db_conn.commit()
     db_conn.close()
 
 
-def new_preference_dict(scope: str, preference_name: str, data_type: str, preference_value,
-                        preference_attr1: str = '', preference_attr2: str = '', preference_attr3: str = ''):
+def new_preference_dict(
+    scope: str,
+    preference_name: str,
+    data_type: str,
+    preference_value,
+    preference_attr1: str = "",
+    preference_attr2: str = "",
+    preference_attr3: str = "",
+):
     """Creates a new preferences dictionary, which can then be used in conjunction with upsert_preference."""
-    preference_dict = {"scope": scope,
-                       "preference_name": preference_name,
-                       "data_type": data_type,
-                       "preference_value": preference_value,
-                       "preference_attr1": preference_attr1,
-                       "preference_attr2": preference_attr2,
-                       "preference_attr3": preference_attr3}
+    preference_dict = {
+        "scope": scope,
+        "preference_name": preference_name,
+        "data_type": data_type,
+        "preference_value": preference_value,
+        "preference_attr1": preference_attr1,
+        "preference_attr2": preference_attr2,
+        "preference_attr3": preference_attr3,
+    }
 
     return preference_dict
-
-
-
 
 
 if __name__ == "__main__":

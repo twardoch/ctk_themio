@@ -1,5 +1,42 @@
 # Changelog
 
+## v2.0.5 (2026-07-05) - Tooling, tests, CI, and a migrator fix
+
+First pass of the portfolio modernisation. No behaviour change for the GUI; the
+headless logic is now tested and the project has continuous integration.
+
+### Fixed
+
+- **Theme migrator crash.** `utils/ctk_theme_migrate.py` wrote to `CTkCheckbox`
+  and `CTkRadiobutton`, but CustomTkinter v5 (and the bundled skeleton) use
+  `CTkCheckBox` and `CTkRadioButton`. Every conversion raised `KeyError`. Fixed
+  the casing so v4→v5 migration completes.
+- **Import-time crash in the migrator.** The module parsed `argv` and validated
+  files at import, so `import ctk_themio.utils.ctk_theme_migrate` failed. Moved
+  the CLI into a guarded `main()`; `ThemeConverter` is now importable and tested.
+- Repaired a mangled module docstring in `model/preferences.py` (literal `n`
+  characters where line breaks belonged).
+
+### Added
+
+- **Test suite** (`tests/`, 29 tests, headless): colour maths and geometry
+  helpers in `cbtk_kit`, the SQLite preference store round-trip, the path map,
+  and a functional v4→v5 migration.
+- **CI** (`.github/workflows/ci.yml`): ruff lint + format check, mypy on the
+  headless modules, and pytest on Linux (under `xvfb`) and macOS.
+- **Release workflow** (`.github/workflows/release.yml`): tag-triggered build
+  and PyPI publish via trusted publishing.
+- Project icon at `docs/assets/icon.png`.
+- Jekyll + Just the Docs documentation site under `docs/` with a Theme schema
+  reference.
+
+### Changed
+
+- Added `ruff`, `mypy`, and `pytest` configuration to `pyproject.toml`, plus a
+  `dev` dependency group. Ruff and mypy pass clean.
+- Added type hints and light annotations to the headless modules; replaced the
+  six `from CTkToolTip import *` star imports with explicit imports.
+
 ## v4.0.0 (2026-03-29) - Modern Python Package Refactoring
 
 Complete restructuring from a script-based project into a standard, installable Python package.

@@ -1,0 +1,19 @@
+title: ctk_themio
+description: Visual theme editor for CustomTkinter — design a theme, see it on every widget, save it as JSON.
+remote_theme: just-the-docs/just-the-docs
+url: https://twardoch.github.io/ctk_themio
+
+color_scheme: dark
+search_enabled: true
+
+aux_links:
+  ctk_themio on GitHub:
+    - https://github.com/twardoch/ctk_themio
+  ctk_themio on PyPI:
+    - https://pypi.org/project/ctk_themio/
+
+plugins:
+  - jekyll-remote-theme
+
+exclude:
+  - "*.md~"

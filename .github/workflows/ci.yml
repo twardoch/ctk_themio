@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint & type-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # hatch-vcs needs full history for the version
+      - uses: astral-sh/setup-uv@v5
+      - name: Ruff (lint)
+        run: uvx ruff check src/ tests/
+      - name: Ruff (format check)
+        run: uvx ruff format --check src/ tests/
+      - name: Mypy (headless modules)
+        run: uvx mypy
+
+  test:
+    name: Tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v5
+      - name: Set up Python
+        run: uv python install 3.13
+      # The theme-generation and preferences logic is tested headless. Tk still
+      # needs a display to import cleanly on Linux, so we run under a virtual
+      # framebuffer; macOS ships a usable windowserver.
+      - name: Run tests (Linux, headless)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          xvfb-run -a uv run --group dev python -m pytest tests/ -v
+      - name: Run tests (macOS)
+        if: runner.os == 'macOS'
+        run: uv run --group dev python -m pytest tests/ -v

@@ -76,3 +76,60 @@ include = [
     "LICENSE",
     "README.md",
 ]
+
+# ---------------------------------------------------------------------------
+# Dev / test tooling
+# ---------------------------------------------------------------------------
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "mypy>=1.10",
+]
+
+[tool.hatch.envs.hatch-test]
+# Theme-generation and preference logic is tested headless; no display needed.
+extra-dependencies = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+# A pragmatic set for a mature Tkinter GUI: pyflakes, a slice of pycodestyle,
+# import sorting, and pyupgrade. We do not chase every stylistic nit in
+# long-lived view code.
+select = ["E", "F", "W", "I", "UP", "B"]
+ignore = [
+    "E501",  # line length is handled by the formatter, not enforced hard
+    "E741",  # ambiguous names (l, O) appear in color math; harmless here
+    "B008",  # default-arg calls are idiomatic in some CTk widget wiring
+]
+
+[tool.ruff.lint.per-file-ignores]
+# GUI entry points keep a runnable `__main__` demo block that references
+# module-local widgets; that is intentional scaffolding, not dead code.
+"src/ctk_themio/view/*.py" = ["E402"]
+
+[tool.mypy]
+python_version = "3.13"
+ignore_missing_imports = true
+warn_unused_ignores = false
+# The GUI layer is dynamically typed against CustomTkinter. We type-check the
+# headless logic (colour maths, preferences store, paths, theme migration) and
+# leave the widget wiring untyped. `files` is what a bare `mypy` invocation
+# checks, since command-line paths bypass `exclude`.
+check_untyped_defs = false
+exclude = ["src/ctk_themio/view/", "src/ctk_themio/demo/"]
+files = [
+    "src/ctk_themio/paths.py",
+    "src/ctk_themio/model/preferences.py",
+    "src/ctk_themio/utils/cbtk_kit.py",
+    "src/ctk_themio/utils/color_constants.py",
+    "src/ctk_themio/utils/ctk_theme_migrate.py",
+]
