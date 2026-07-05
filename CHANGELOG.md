@@ -1,6 +1,6 @@
 # Changelog
 
-## v2.0.5 (2026-07-05) - Tooling, tests, CI, and a migrator fix
+## v3.1.1 (2026-07-05) - Tooling, tests, CI, and a migrator fix
 
 First pass of the portfolio modernisation. No behaviour change for the GUI; the
 headless logic is now tested and the project has continuous integration.
