@@ -80,3 +80,4 @@ gridedit.py
 lib/
 simple_example.py
 theme_builder_setup.tar
+src/ctk_themio/__version__.py

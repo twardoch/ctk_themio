@@ -133,3 +133,6 @@ files = [
     "src/ctk_themio/utils/color_constants.py",
     "src/ctk_themio/utils/ctk_theme_migrate.py",
 ]
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/ctk_themio/__version__.py"
